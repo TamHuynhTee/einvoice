@@ -5,6 +5,7 @@
   "scripts": {
     "prepare": "husky"
   },
+  "type": "module",
   "private": true,
   "dependencies": {
     "@nestjs/common": "^11.0.0",
@@ -51,8 +52,11 @@
     "webpack-cli": "^5.1.4"
   },
   "lint-staged": {
-    "*.{ts,js}": [
+    "*.{ts,tsx,js,jsx}": [
       "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json,yml,yaml,html}": [
       "prettier --write"
     ]
   }
