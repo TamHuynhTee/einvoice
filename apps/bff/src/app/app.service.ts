@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PORT } from '@common/constants/common.constants';
+import { PORT } from '@common/constants/lib/common.constants';
 
 @Injectable()
 export class AppService {
