@@ -1,10 +1,34 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
+import { Metadata } from '@common/constants/lib/common.constants';
+import { getProcessId } from '@common/utils/lib/string.util';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('Request...');
+    const startTime = Date.now();
+    const { method, originalUrl, body } = req;
+
+    const processId = getProcessId();
+    const now = Date.now();
+    const requestBody = JSON.stringify(body);
+
+    (req as any)[Metadata.PROCESS_ID] = processId;
+    (req as any)[Metadata.START_TIME] = startTime;
+
+    Logger.log(
+      `HTTP >> Start process '${processId}' >> path: '${originalUrl}' >> method: ${method} at ${now} >> input: ${requestBody}`,
+    );
+
+    const resOrigin = res.send.bind(res);
+    res.send = (body) => {
+      const duration = Date.now() - startTime;
+      Logger.log(
+        `HTTP >> End process '${processId}' >> path: '${originalUrl}' >> method: ${method} at ${now} >> duration: ${duration} ms`,
+      );
+
+      return resOrigin(body);
+    };
     next();
   }
 }
