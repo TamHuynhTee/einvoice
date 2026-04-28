@@ -17,6 +17,7 @@
     "paths": {
       "@common/configuration/lib/*": ["libs/configuration/src/lib/*"],
       "@common/constants/lib/*": ["libs/constants/src/lib/*"],
+      "@common/interfaces/lib/*": ["libs/interfaces/src/lib/*"],
       "@common/middlewares/lib/*": ["libs/middlewares/src/lib/*"],
       "@common/utils/lib/*": ["libs/utils/src/lib/*"]
     }
