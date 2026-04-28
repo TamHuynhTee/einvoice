@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { CONFIGURATION } from '../configuration';
 import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
+import { ExceptionsInterceptor } from '@common/interceptors/lib/exceptions.interceptor';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -13,7 +15,7 @@ import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, { provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor }],
 })
 export class AppModule implements NestModule {
   static CONFIGURATION = CONFIGURATION;

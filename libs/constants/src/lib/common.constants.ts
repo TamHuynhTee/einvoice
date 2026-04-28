@@ -1,6 +1,6 @@
 export const PORT = 3000;
 
-export enum Metadata {
+export enum MetadataKeys {
   PROCESS_ID = 'processId',
   START_TIME = 'startTime',
 }
