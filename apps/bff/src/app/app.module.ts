@@ -6,6 +6,8 @@ import { CONFIGURATION } from '../configuration';
 import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
 import { ExceptionsInterceptor } from '@common/interceptors/lib/exceptions.interceptor';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ClientsModule } from '@nestjs/microservices';
+import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
 
 @Module({
   imports: [
@@ -13,6 +15,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
       isGlobal: true,
       load: [() => CONFIGURATION],
     }),
+    ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.INVOICE_SERVICE)]),
   ],
   controllers: [AppController],
   providers: [AppService, { provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor }],

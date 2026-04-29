@@ -22,10 +22,10 @@ export class BaseConfiguration {
     const errors = validateSync(this);
     if (errors.length > 0) {
       const _errors = errors.map((error) => {
-        return error.constraints;
+        return error.children;
       });
 
-      Logger.error(_errors);
+      Logger.error(_errors, errors);
 
       throw new Error('Configuration is invalid');
     }
