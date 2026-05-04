@@ -1,7 +1,8 @@
 import { TCPLoggingInterceptor } from '@common/interceptors/lib/tcpLogging.interceptor';
-import { Request } from '@common/interfaces/lib/tcp/common/request.interface';
 import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { ProcessId } from '@common/decorators/lib/processId.decorator';
+import { RequestParams } from '@common/decorators/lib/request-param.decorator';
+import { Controller, Get, Logger, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { AppService } from './app.service';
 
@@ -16,7 +17,15 @@ export class AppController {
   }
 
   @MessagePattern({ cmd: 'get_invoice' })
-  getInvoice(invoiceId: Request<number>): Response<string> {
-    return Response.success(`Invoice #${invoiceId.data}`);
+  getInvoice(
+    @ProcessId() processId: string,
+    @RequestParams() params: { invoiceId: string; invoiceName: string },
+    @RequestParams('invoiceId') invoiceId: string,
+  ): Response<string> {
+    Logger.debug(`processId: ${processId}`);
+    Logger.debug(`invoiceId: ${invoiceId}`);
+    Logger.debug(`invoiceName: ${params.invoiceName}`);
+
+    return Response.success(`Invoice #${invoiceId} - ${params.invoiceName} - Process ID: ${processId}`);
   }
 }
