@@ -1,7 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
-import { InvoiceStatus } from '@common/constants/lib/enum/invoice.enum';
+import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
 
 export class Client {
   @Prop({ type: String })
@@ -47,8 +47,8 @@ export class Invoice extends BaseSchema {
   @Prop({ type: Number })
   vatAmount: number;
 
-  @Prop({ type: String, enum: InvoiceStatus })
-  status: InvoiceStatus;
+  @Prop({ type: String, enum: INVOICE_STATUS })
+  status: INVOICE_STATUS;
 
   @Prop({ type: [Item] })
   items: Item[];
