@@ -3,11 +3,11 @@
  * This is only a minimal backend to get started.
  */
 
+import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import { MicroserviceOptions } from '@nestjs/microservices';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -27,32 +27,5 @@ export class TCPLoggingInterceptor implements NestInterceptor {
         throw err;
       }),
     );
-
-    // return next.handle().pipe(
-    //   map((data: ResponseDTO<unknown>) => {
-    //     const durationMs = Date.now() - startTime;
-    //     data.processID = processID;
-    //     data.duration = `${durationMs} ms`;
-    //     return data;
-    //   }),
-    //   catchError((err) => {
-    //     this.logger.error(err);
-
-    //     const durationMs = Date.now() - startTime;
-
-    //     const message = err?.response?.message || err?.message || err || HTTP_MESSAGE.INTERNAL_SERVER_ERROR;
-    //     const statusCode =
-    //       err?.code || err?.statusCode || err?.response?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
-
-    //     const errorResponse = {
-    //       message,
-    //       statusCode,
-    //       data: null,
-    //       processID,
-    //       duration: `${durationMs} ms`,
-    //     };
-    //     throw new HttpException(new ResponseDTO(errorResponse), statusCode);
-    //   }),
-    // );
   }
 }

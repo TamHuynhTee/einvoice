@@ -1,4 +1,4 @@
-import { CallHandler, HttpException, HttpStatus, Logger, NestInterceptor, Res } from '@nestjs/common';
+import { CallHandler, HttpException, HttpStatus, Logger, NestInterceptor } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
 import { type Request } from 'express';
 import { MetadataKeys } from '@common/constants/lib/common.constants';

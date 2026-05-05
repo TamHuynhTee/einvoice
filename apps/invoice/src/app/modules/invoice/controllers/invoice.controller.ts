@@ -1,8 +1,9 @@
+import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
+import { RequestParams } from '@common/decorators/lib/request-param.decorator';
 import { TCPLoggingInterceptor } from '@common/interceptors/lib/tcpLogging.interceptor';
 import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
-import { ProcessId } from '@common/decorators/lib/processId.decorator';
-import { RequestParams } from '@common/decorators/lib/request-param.decorator';
-import { Controller, Logger, UseInterceptors } from '@nestjs/common';
+import { CreateInvoiceTCPRequest, InvoiceTCPResponse } from '@common/interfaces/lib/tcp/invoice';
+import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { InvoiceService } from '../services/invoice.service';
 
@@ -11,16 +12,9 @@ import { InvoiceService } from '../services/invoice.service';
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 
-  @MessagePattern({ cmd: 'get_invoice' })
-  getInvoice(
-    @ProcessId() processId: string,
-    @RequestParams() params: { invoiceId: string; invoiceName: string },
-    @RequestParams('invoiceId') invoiceId: string,
-  ): Response<string> {
-    Logger.debug(`processId: ${processId}`);
-    Logger.debug(`invoiceId: ${invoiceId}`);
-    Logger.debug(`invoiceName: ${params.invoiceName}`);
-
-    return Response.success(`Invoice #${invoiceId} - ${params.invoiceName} - Process ID: ${processId}`);
+  @MessagePattern({ cmd: TCP_REQUEST_MESSAGE.INVOICE.CREATE })
+  async create(@RequestParams() data: CreateInvoiceTCPRequest): Promise<Response<InvoiceTCPResponse>> {
+    const result = await this.invoiceService.create(data);
+    return Response.success<InvoiceTCPResponse>(result);
   }
 }

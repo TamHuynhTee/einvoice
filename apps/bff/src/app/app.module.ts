@@ -1,13 +1,10 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
-import { CONFIGURATION } from '../configuration';
-import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
 import { ExceptionsInterceptor } from '@common/interceptors/lib/exceptions.interceptor';
+import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { ClientsModule } from '@nestjs/microservices';
-import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
+import { CONFIGURATION } from '../configuration';
+import { InvoiceModule } from './modules/invoice/invoice.module';
 
 @Module({
   imports: [
@@ -15,10 +12,10 @@ import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config'
       isGlobal: true,
       load: [() => CONFIGURATION],
     }),
-    ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.INVOICE_SERVICE)]),
+    InvoiceModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, { provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor }],
+  controllers: [],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor }],
 })
 export class AppModule implements NestModule {
   static CONFIGURATION = CONFIGURATION;
