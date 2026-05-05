@@ -22,7 +22,8 @@
       "@common/interceptors/lib/*": ["libs/interceptors/src/lib/*"],
       "@common/middlewares/lib/*": ["libs/middlewares/src/lib/*"],
       "@common/utils/lib/*": ["libs/utils/src/lib/*"],
-      "@common/decorators/lib/*": ["libs/decorators/src/lib/*"]
+      "@common/decorators/lib/*": ["libs/decorators/src/lib/*"],
+      "@common/schemas/lib/*": ["libs/schemas/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
