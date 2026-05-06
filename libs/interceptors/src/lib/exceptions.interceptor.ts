@@ -1,4 +1,4 @@
-import { CallHandler, HttpException, HttpStatus, Logger, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, HttpException, HttpStatus, Logger, NestInterceptor } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
 import { type Request } from 'express';
 import { MetadataKeys } from '@common/constants/lib/common.constants';
@@ -8,7 +8,7 @@ import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
 export class ExceptionsInterceptor implements NestInterceptor {
   private readonly logger = new Logger(ExceptionsInterceptor.name);
 
-  intercept(context: any, next: CallHandler): Observable<any> | Promise<Observable<any>> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> | Promise<Observable<unknown>> {
     const ctx = context.switchToHttp();
     const request: Request & { [MetadataKeys.PROCESS_ID]: string; [MetadataKeys.START_TIME]: number } =
       ctx.getRequest();

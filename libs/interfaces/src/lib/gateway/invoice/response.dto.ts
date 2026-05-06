@@ -34,7 +34,7 @@ class ItemResponseDto {
   total: number;
 }
 
-export class CreateInvoiceResponseDto extends BaseResponseDto {
+export class CreateInvoiceResponseDto extends BaseResponseDto<string> {
   @ApiProperty({ type: ClientResponseDto })
   client: ClientResponseDto;
 

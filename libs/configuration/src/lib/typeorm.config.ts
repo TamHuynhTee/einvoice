@@ -51,7 +51,7 @@ export const TypeORMProvider = TypeOrmModule.forRootAsync({
       password: configService.get<string>('TYPEORM_CONFIG.PASSWORD'),
       database: configService.get<string>('TYPEORM_CONFIG.DATABASE'),
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-      synchronize: true,
+      synchronize: !!configService.get<boolean>('IS_DEV'),
       autoLoadEntities: true,
     } as TypeOrmModuleOptions;
   },
