@@ -25,7 +25,7 @@ async function bootstrap() {
     TcpConfiguration.setValue(tcpProductServicePort, tcpProductServiceHost) as MicroserviceOptions,
   );
 
-  const globalPrefix = 'api';
+  const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
   app.setGlobalPrefix(globalPrefix);
   const port = AppModule.CONFIGURATION.APP_CONFIG.PORT || DEFAULT_HTTP_SERVICE_PORT.PRODUCT;
 
