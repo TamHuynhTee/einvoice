@@ -14,7 +14,14 @@ enum PRODUCT {
   EXISTS = 'product.exists',
 }
 
+enum ROLE {
+  GET_ALL = 'role.get_all',
+  GET_BY_ID = 'role.get_by_id',
+  GET_BY_NAME = 'role.get_by_name',
+}
+
 export const TCP_REQUEST_MESSAGE = {
   INVOICE,
   PRODUCT,
+  ROLE,
 };
