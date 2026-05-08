@@ -20,8 +20,15 @@ enum ROLE {
   GET_BY_NAME = 'role.get_by_name',
 }
 
+enum USER {
+  CREATE = 'user.create',
+  GET_ALL = 'user.get_all',
+  GET_BY_USER_ID = 'user.get_by_user_id',
+}
+
 export const TCP_REQUEST_MESSAGE = {
   INVOICE,
   PRODUCT,
   ROLE,
+  USER,
 };

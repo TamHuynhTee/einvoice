@@ -1,0 +1,33 @@
+import { Prop, Schema } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { BaseSchema, createSchema } from './base.schema';
+import { ObjectId } from 'mongodb';
+
+@Schema({
+  collection: 'user',
+})
+export class User extends BaseSchema {
+  @Prop({ type: String })
+  firstName: string;
+
+  @Prop({ type: String })
+  lastName: string;
+
+  @Prop({ type: String })
+  email: string;
+
+  @Prop({ type: String })
+  userId: string;
+
+  @Prop({ type: [ObjectId], ref: 'role' })
+  roles: ObjectId[];
+}
+
+export const UserSchema = createSchema(User);
+export const UserModelName = User.name;
+export const UserDestination = {
+  name: UserModelName,
+  schema: UserSchema,
+};
+
+export type UserModel = Model<User>;
