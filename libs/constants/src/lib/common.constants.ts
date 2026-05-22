@@ -8,12 +8,14 @@ export const DEFAULT_HTTP_SERVICE_PORT = {
   INVOICE: 3001,
   PRODUCT: 3002,
   USER_ACCESS: 3003,
+  AUTHORIZER: 3004,
 };
 
 export const DEFAULT_TCP_SERVICE_PORT = {
   INVOICE: 3201,
   PRODUCT: 3202,
   USER_ACCESS: 3203,
+  AUTHORIZER: 3204,
 };
 
 export enum MetadataKeys {
