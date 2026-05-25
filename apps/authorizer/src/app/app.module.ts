@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CONFIGURATION } from '../configuration';
 import { KeycloakModule } from './modules/keycloak/keycloak.module';
+import { AuthorizerModule } from './modules/authorizer/authorizer.module';
 
 @Module({
   imports: [
@@ -9,6 +10,7 @@ import { KeycloakModule } from './modules/keycloak/keycloak.module';
       isGlobal: true,
       load: [() => CONFIGURATION],
     }),
+    AuthorizerModule,
     KeycloakModule,
   ],
 })
