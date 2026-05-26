@@ -21,4 +21,5 @@ export const DEFAULT_TCP_SERVICE_PORT = {
 export enum MetadataKeys {
   PROCESS_ID = 'processId',
   START_TIME = 'startTime',
+  SECURED = 'secured',
 }
