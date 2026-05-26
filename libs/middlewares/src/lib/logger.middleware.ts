@@ -1,12 +1,12 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
 import { MetadataKeys } from '@common/constants/lib/common.constants';
-import { type Request } from '@common/interfaces/lib/common';
+import { type ExtendedRequest } from '@common/interfaces/lib/common';
 import { getProcessId } from '@common/utils/lib/string.util';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: NextFunction) {
+  use(req: ExtendedRequest, res: Response, next: NextFunction) {
     const startTime = Date.now();
     const { method, originalUrl, body } = req;
 

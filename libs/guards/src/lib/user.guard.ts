@@ -4,7 +4,7 @@ import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-mess
 import { type ExtendedRequest } from '@common/interfaces/lib/common';
 import { AuthorizeResponse } from '@common/interfaces/lib/tcp/authorizer';
 import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { getAccessToken } from '@common/utils/lib/request.util';
+import { getAccessToken, setUserData } from '@common/utils/lib/request.util';
 import { CanActivate, ExecutionContext, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { firstValueFrom, map, Observable } from 'rxjs';
@@ -51,6 +51,8 @@ export class UserGuard implements CanActivate {
       if (!result || !result.valid) {
         throw new UnauthorizedException('Invalid or missing access token');
       }
+
+      setUserData(request, result);
 
       return true;
     } catch (error) {

@@ -48,4 +48,8 @@ export class UserService {
         .pipe(map((response) => response.data)),
     );
   }
+
+  getUserByUserId(userId: string) {
+    return this.userRepository.getByUserId(userId);
+  }
 }
