@@ -1,4 +1,5 @@
 import { UserGuard } from '@common/guards/lib/user.guard';
+import { PermissionsGuard } from '@common/guards/lib/permission.guard';
 import { ExceptionsInterceptor } from '@common/interceptors/lib/exceptions.interceptor';
 import { LoggerMiddleware } from '@common/middlewares/lib/logger.middleware';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -28,6 +29,7 @@ import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config'
   providers: [
     { provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor },
     { provide: APP_GUARD, useClass: UserGuard },
+    { provide: APP_GUARD, useClass: PermissionsGuard },
   ],
 })
 export class AppModule implements NestModule {

@@ -1,6 +1,8 @@
 import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
+import { PERMISSION } from '@common/constants/lib/enum/role.enum';
 import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
 import { Authorization } from '@common/decorators/lib/authorizer.decorator';
+import { Permissions } from '@common/decorators/lib/permission.decorator';
 import { ProcessId } from '@common/decorators/lib/processId.decorator';
 import { UserData } from '@common/decorators/lib/user-data.decorator';
 import { CreateInvoiceRequestDto, CreateInvoiceResponseDto } from '@common/interfaces/lib/gateway/invoice';
@@ -21,6 +23,7 @@ export class InvoiceController {
   @ApiOkResponse({ type: ResponseDTO<CreateInvoiceResponseDto> })
   @ApiOperation({ summary: 'Create a new invoice' })
   @Authorization({ secured: true })
+  @Permissions([PERMISSION.INVOICE_CREATE, PERMISSION.INVOICE_GET_BY_ID])
   create(
     @Body() data: CreateInvoiceRequestDto,
     @ProcessId() processId: string,
