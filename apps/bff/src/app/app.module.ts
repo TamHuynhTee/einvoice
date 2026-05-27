@@ -12,6 +12,7 @@ import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
 import { ClientsModule } from '@nestjs/microservices';
 import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
+import { RedisProvider } from '@common/configuration/lib/redis.config';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config'
     UserModule,
     AuthorizerModule,
     ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE)]),
+    RedisProvider,
   ],
   controllers: [],
   providers: [
