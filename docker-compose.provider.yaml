@@ -66,3 +66,27 @@ services:
       - ./docker/docker_data/keycloak_data:/opt/keycloak/data
     networks:
       - einvoice-nw
+
+  redis:
+    image: redis
+    container_name: redis_server
+    ports:
+      - '6379:6379'
+    restart: unless-stopped
+    volumes:
+      - ./docker/docker_data/redis_data:/data
+    networks:
+      - einvoice-nw
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis_insight_ui
+    ports:
+      - '5540:5540'
+    restart: unless-stopped
+    depends_on:
+      - redis
+    volumes:
+      - ./docker/docker_data/redisinsight_data:/data
+    networks:
+      - einvoice-nw
