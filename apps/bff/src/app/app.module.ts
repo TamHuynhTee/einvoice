@@ -13,6 +13,8 @@ import { UserModule } from './modules/user/user.module';
 import { ClientsModule } from '@nestjs/microservices';
 import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
 import { RedisProvider } from '@common/configuration/lib/redis.config';
+import { ThrottlerProvider } from '@common/configuration/lib/throttler.config';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -26,12 +28,14 @@ import { RedisProvider } from '@common/configuration/lib/redis.config';
     AuthorizerModule,
     ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE)]),
     RedisProvider,
+    ThrottlerProvider,
   ],
   controllers: [],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: ExceptionsInterceptor },
     { provide: APP_GUARD, useClass: UserGuard },
     { provide: APP_GUARD, useClass: PermissionsGuard },
+    { provide: APP_GUARD, useClass: ThrottlerGuard },
   ],
 })
 export class AppModule implements NestModule {
