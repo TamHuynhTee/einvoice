@@ -2,6 +2,7 @@ import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
 import { ObjectId } from 'mongodb';
+import { RoleModelName } from './role.schema';
 
 @Schema({
   collection: 'user',
@@ -19,7 +20,7 @@ export class User extends BaseSchema {
   @Prop({ type: String })
   userId: string;
 
-  @Prop({ type: [ObjectId], ref: 'role' })
+  @Prop({ type: [ObjectId], ref: RoleModelName })
   roles: ObjectId[];
 }
 

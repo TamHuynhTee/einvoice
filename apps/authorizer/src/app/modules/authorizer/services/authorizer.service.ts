@@ -45,7 +45,7 @@ export class AuthorizerService {
   async verifyUserToken(token: string, processId: string): Promise<AuthorizeResponse> {
     const decoded = jwt.decode(token, { complete: true }) as Jwt;
     if (!decoded || !decoded.header || !decoded.header.kid) {
-      throw new Error('Invalid token structure');
+      throw new UnauthorizedException('Invalid token structure');
     }
 
     try {
@@ -55,7 +55,7 @@ export class AuthorizerService {
       const verifiedToken = jwt.verify(token, publicKey, { algorithms: ['RS256'] }) as JwtPayload;
 
       if (!verifiedToken.sub) {
-        throw new Error('Token does not contain sub claim');
+        throw new UnauthorizedException('Token does not contain sub claim');
       }
 
       const user = await this.validateUser(verifiedToken.sub, processId);
@@ -71,11 +71,12 @@ export class AuthorizerService {
       };
     } catch (error) {
       this.logger.error({ error });
-      throw new UnauthorizedException('Invalid token');
+      throw error;
     }
   }
 
   private async validateUser(userId: string, processId: string) {
+    this.logger.debug(`Validating user with ID: ${userId} for process ID: ${processId}`);
     const user = await this.getUserByUserId(userId, processId);
 
     if (!user) {

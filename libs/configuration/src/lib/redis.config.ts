@@ -15,7 +15,7 @@ export class RedisConfiguration {
   TTL: number;
 
   constructor(data?: Partial<RedisConfiguration>) {
-    this.HOST = data?.HOST || process.env['REDIS_HOST'] || 'redis';
+    this.HOST = data?.HOST || process.env['REDIS_HOST'] || 'localhost';
     this.PORT = Number(data?.PORT || process.env['REDIS_PORT']) || 6379;
     this.TTL = Number(data?.TTL || process.env['REDIS_TTL']) || 30 * 60000;
   }
@@ -29,7 +29,7 @@ export const RedisProvider = CacheModule.registerAsync({
     const port = configService.get('REDIS_CONFIG.PORT');
     const ttl = configService.get('REDIS_CONFIG.TTL');
     return {
-      store: [createKeyv(`redis://${host}:${port}`)],
+      stores: [createKeyv(`redis://${host}:${port}`)],
       ttl: Number(ttl),
     };
   },
