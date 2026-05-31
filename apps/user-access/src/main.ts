@@ -4,15 +4,15 @@
  */
 
 import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions } from '@nestjs/microservices';
-import { AppModule } from './app/app.module';
 import {
   DEFAULT_HTTP_SERVICE_PORT,
   DEFAULT_TCP_HOST,
   DEFAULT_TCP_SERVICE_PORT,
 } from '@common/constants/lib/common.constants';
+import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,6 +25,15 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>(
     TcpConfiguration.setValue(tcpUserAccessServicePort, tcpUserAccessServiceHost) as MicroserviceOptions,
   );
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      package: AppModule.CONFIGURATION.GRPC_SERV.GRPC_USER_ACCESS_SERVICE.options?.package,
+      protoPath: AppModule.CONFIGURATION.GRPC_SERV.GRPC_USER_ACCESS_SERVICE.options?.protoPath,
+      url: AppModule.CONFIGURATION.GRPC_SERV.GRPC_USER_ACCESS_SERVICE.options?.url,
+    },
+  });
 
   const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
   app.setGlobalPrefix(globalPrefix);

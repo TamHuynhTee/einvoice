@@ -27,8 +27,10 @@ import { ThrottlerGuard } from '@nestjs/throttler';
     ProductModule,
     UserModule,
     AuthorizerModule,
-    ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE)]),
-    ClientsModule.registerAsync([GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE)]),
+    ClientsModule.registerAsync([
+      TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE),
+      GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE),
+    ]),
     RedisProvider,
     ThrottlerProvider,
   ],

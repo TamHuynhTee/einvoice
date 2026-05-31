@@ -1,23 +1,27 @@
+import { GRPC_SERVICES } from '@common/configuration/lib/grpc.config';
+import { UserAccessService } from '@common/interfaces/lib/grpc/user-access';
 import { AuthorizeResponse, LoginTCPRequest } from '@common/interfaces/lib/tcp/authorizer';
+import { Role } from '@common/schemas/lib/role.schema';
 import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
-import { KeycloakHttpService } from '../../keycloak/services/keycloak-http.service';
+import { ConfigService } from '@nestjs/config';
+import { ClientGrpc } from '@nestjs/microservices';
 import jwt, { Jwt, JwtPayload } from 'jsonwebtoken';
 import jwksRsa, { JwksClient } from 'jwks-rsa';
-import { ConfigService } from '@nestjs/config';
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { Role } from '@common/schemas/lib/role.schema';
-import { User } from '@common/schemas/lib/user.schema';
-import { firstValueFrom, map } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
+import { KeycloakHttpService } from '../../keycloak/services/keycloak-http.service';
 
 @Injectable()
 export class AuthorizerService {
   private readonly logger = new Logger(AuthorizerService.name);
   private jwksClient: JwksClient;
+  private userAccessService: UserAccessService;
+
+  onModuleInit() {
+    this.userAccessService = this.grpcUserAccessClient.getService<UserAccessService>('UserAccessService');
+  }
 
   constructor(
-    @Inject(TCP_SERVICES.USER_ACCESS_SERVICE) private readonly userAccessService: TcpClient,
+    @Inject(GRPC_SERVICES.USER_ACCESS_SERVICE) private readonly grpcUserAccessClient: ClientGrpc,
     private readonly keycloakHttpService: KeycloakHttpService,
     private readonly configService: ConfigService,
   ) {
@@ -76,21 +80,12 @@ export class AuthorizerService {
   }
 
   private async validateUser(userId: string, processId: string) {
-    this.logger.debug(`Validating user with ID: ${userId} for process ID: ${processId}`);
-    const user = await this.getUserByUserId(userId, processId);
+    const { data: user } = await firstValueFrom(this.userAccessService.getUserById({ userId, processId }));
 
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
 
     return user;
-  }
-
-  private async getUserByUserId(userId: string, processId: string) {
-    const observable = await this.userAccessService.send<User, string>(TCP_REQUEST_MESSAGE.USER.GET_BY_USER_ID, {
-      processId,
-      data: userId,
-    });
-    return firstValueFrom(observable.pipe(map((res) => res.data)));
   }
 }

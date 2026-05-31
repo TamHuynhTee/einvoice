@@ -9,9 +9,9 @@ export enum GRPC_SERVICES {
 }
 
 export class GrpcConfiguration {
-  // @IsNotEmpty()
-  // @IsObject()
-  // GRPC_USER_ACCESS_SERVICE: GrpcOptions & { name: string };
+  @IsNotEmpty()
+  @IsObject()
+  GRPC_USER_ACCESS_SERVICE: GrpcOptions & { name: string };
 
   @IsNotEmpty()
   @IsObject()
@@ -23,6 +23,13 @@ export class GrpcConfiguration {
       protoPath: ['./proto/authorizer.proto'],
       host: process.env['AUTHORIZER_SERVICE_HOST'] || 'localhost',
       port: Number(process.env['AUTHORIZER_SERVICE_PORT']) || 5100,
+    });
+
+    this.GRPC_USER_ACCESS_SERVICE = GrpcConfiguration.setValue({
+      key: GRPC_SERVICES.USER_ACCESS_SERVICE,
+      protoPath: ['./proto/user-access.proto'],
+      host: process.env['USER_ACCESS_SERVICE_HOST'] || 'localhost',
+      port: Number(process.env['USER_ACCESS_SERVICE_PORT']) || 5101,
     });
   }
 

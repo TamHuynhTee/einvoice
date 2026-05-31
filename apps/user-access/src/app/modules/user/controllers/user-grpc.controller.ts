@@ -1,0 +1,19 @@
+import { GRPCLoggingInterceptor } from '@common/interceptors/lib/grpcLogging.interceptor';
+import { Response } from '@common/interfaces/lib/grpc/common/response.interface';
+import { GetUserByIdRequest, GetUserByIdResponse } from '@common/interfaces/lib/grpc/user-access';
+import { User } from '@common/schemas/lib/user.schema';
+import { Controller, UseInterceptors } from '@nestjs/common';
+import { GrpcMethod } from '@nestjs/microservices';
+import { UserService } from '../services/user.service';
+
+@Controller()
+@UseInterceptors(GRPCLoggingInterceptor)
+export class UserGrpcController {
+  constructor(private readonly userService: UserService) {}
+
+  @GrpcMethod('UserAccessService', 'getUserById')
+  async getUserById(params: GetUserByIdRequest): Promise<GetUserByIdResponse> {
+    const user = (await this.userService.getUserByUserId(params.userId)) as User;
+    return Response.success<User>(user);
+  }
+}
