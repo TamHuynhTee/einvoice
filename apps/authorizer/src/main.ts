@@ -11,7 +11,7 @@ import {
 } from '@common/constants/lib/common.constants';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions } from '@nestjs/microservices';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -25,6 +25,15 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>(
     TcpConfiguration.setValue(tcpAuthorizerServicePort, tcpAuthorizerServiceHost) as MicroserviceOptions,
   );
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      package: AppModule.CONFIGURATION.GRPC_SERV.GRPC_AUTHORIZER_SERVICE.options?.package,
+      protoPath: AppModule.CONFIGURATION.GRPC_SERV.GRPC_AUTHORIZER_SERVICE.options?.protoPath,
+      url: AppModule.CONFIGURATION.GRPC_SERV.GRPC_AUTHORIZER_SERVICE.options?.url,
+    },
+  });
 
   const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
   app.setGlobalPrefix(globalPrefix);

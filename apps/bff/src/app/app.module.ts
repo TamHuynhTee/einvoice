@@ -12,6 +12,7 @@ import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
 import { ClientsModule } from '@nestjs/microservices';
 import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
+import { GRPC_SERVICES, GrpcProvider } from '@common/configuration/lib/grpc.config';
 import { RedisProvider } from '@common/configuration/lib/redis.config';
 import { ThrottlerProvider } from '@common/configuration/lib/throttler.config';
 import { ThrottlerGuard } from '@nestjs/throttler';
@@ -27,6 +28,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
     UserModule,
     AuthorizerModule,
     ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE)]),
+    ClientsModule.registerAsync([GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE)]),
     RedisProvider,
     ThrottlerProvider,
   ],
