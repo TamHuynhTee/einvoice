@@ -1,0 +1,52 @@
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
+import ejs from 'ejs';
+import fs from 'fs';
+import path from 'path';
+import puppeteer from 'puppeteer';
+
+@Injectable()
+export class PdfService {
+  private readonly logger = new Logger(PdfService.name);
+
+  renderEjsTemplate(templatePath: string, data: any): Promise<string> {
+    const fullPath = path.resolve(templatePath);
+    if (!fs.existsSync(fullPath)) {
+      throw new NotFoundException(`Template does not exist at path: ${templatePath}`);
+    }
+
+    return ejs.renderFile(fullPath, data);
+  }
+
+  private async generatePdfFromHtml(html: string): Promise<Uint8Array<ArrayBufferLike>> {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
+
+    const page = await browser.newPage();
+    await page.setContent(html, {
+      waitUntil: 'load',
+    });
+
+    await page.waitForNetworkIdle({
+      idleTime: 500,
+      timeout: 30000,
+    });
+
+    const pdfBuffer = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+    });
+
+    await browser.close();
+    return pdfBuffer;
+  }
+
+  async generatePdfFromEjs(templatePath: string, data: any): Promise<Uint8Array<ArrayBufferLike>> {
+    const html = await this.renderEjsTemplate(templatePath, data);
+
+    this.logger.debug(`Generated HTML content: ${html}`);
+
+    return this.generatePdfFromHtml(html);
+  }
+}

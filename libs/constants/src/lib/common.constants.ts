@@ -9,6 +9,7 @@ export const DEFAULT_HTTP_SERVICE_PORT = {
   PRODUCT: 3102,
   USER_ACCESS: 3103,
   AUTHORIZER: 3104,
+  PDF_GENERATOR: 3105,
 };
 
 export const DEFAULT_TCP_SERVICE_PORT = {
@@ -16,6 +17,7 @@ export const DEFAULT_TCP_SERVICE_PORT = {
   PRODUCT: 3202,
   USER_ACCESS: 3203,
   AUTHORIZER: 3204,
+  PDF_GENERATOR: 3205,
 };
 
 export enum MetadataKeys {

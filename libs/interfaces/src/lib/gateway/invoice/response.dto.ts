@@ -56,3 +56,5 @@ export class CreateInvoiceResponseDto extends BaseResponseDto<string> {
   @ApiPropertyOptional()
   fileUrl?: string;
 }
+
+export class SendInvoiceResponseDto extends BaseResponseDto<string> {}

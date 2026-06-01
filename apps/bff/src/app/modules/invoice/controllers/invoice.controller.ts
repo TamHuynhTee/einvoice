@@ -5,12 +5,22 @@ import { Authorization } from '@common/decorators/lib/authorizer.decorator';
 import { Permissions } from '@common/decorators/lib/permission.decorator';
 import { ProcessId } from '@common/decorators/lib/processId.decorator';
 import { UserData } from '@common/decorators/lib/user-data.decorator';
-import { CreateInvoiceRequestDto, CreateInvoiceResponseDto } from '@common/interfaces/lib/gateway/invoice';
+import {
+  CreateInvoiceRequestDto,
+  CreateInvoiceResponseDto,
+  SendInvoiceRequestDto,
+  SendInvoiceResponseDto,
+} from '@common/interfaces/lib/gateway/invoice';
 import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';
 import { AuthorizedMetadata } from '@common/interfaces/lib/tcp/authorizer';
 import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { CreateInvoiceTCPRequest, InvoiceTCPResponse } from '@common/interfaces/lib/tcp/invoice';
-import { Body, Controller, Inject, Logger, Post } from '@nestjs/common';
+import {
+  CreateInvoiceTCPRequest,
+  InvoiceTCPResponse,
+  SendInvoiceTCPRequest,
+  SendInvoiceTCPResponse,
+} from '@common/interfaces/lib/tcp/invoice';
+import { Body, Controller, Inject, Param, Post, UnauthorizedException } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs';
 
@@ -24,21 +34,30 @@ export class InvoiceController {
   @ApiOperation({ summary: 'Create a new invoice' })
   @Authorization({ secured: true })
   @Permissions([PERMISSION.INVOICE_CREATE, PERMISSION.INVOICE_GET_BY_ID])
-  create(
-    @Body() data: CreateInvoiceRequestDto,
-    @ProcessId() processId: string,
-    @UserData() userData: AuthorizedMetadata,
-  ) {
-    Logger.log(userData);
+  create(@Body() data: CreateInvoiceRequestDto, @ProcessId() processId: string) {
+    return this.invoiceService
+      .send<InvoiceTCPResponse, CreateInvoiceTCPRequest>(TCP_REQUEST_MESSAGE.INVOICE.CREATE, {
+        processId,
+        data,
+      })
+      .pipe(map((data) => new ResponseDTO(data)));
+  }
+
+  @Post(':id/send')
+  @ApiOkResponse({ type: ResponseDTO<SendInvoiceResponseDto> })
+  @ApiOperation({ summary: 'Send an existing invoice' })
+  @Authorization({ secured: true })
+  @Permissions([PERMISSION.INVOICE_SEND])
+  send(@Param('id') id: string, @UserData() userData: AuthorizedMetadata, @ProcessId() processId: string) {
+    if (!userData || !userData.userId) {
+      throw new UnauthorizedException('User data is missing in the request context');
+    }
 
     return this.invoiceService
-      .send<InvoiceTCPResponse, CreateInvoiceTCPRequest>(
-        { cmd: TCP_REQUEST_MESSAGE.INVOICE.CREATE },
-        {
-          processId,
-          data,
-        },
-      )
+      .send<SendInvoiceTCPResponse, SendInvoiceTCPRequest>(TCP_REQUEST_MESSAGE.INVOICE.SEND, {
+        processId,
+        data: { userId: userData.userId, invoiceId: id },
+      })
       .pipe(map((data) => new ResponseDTO(data)));
   }
 }

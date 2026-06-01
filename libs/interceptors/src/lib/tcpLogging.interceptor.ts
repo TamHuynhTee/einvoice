@@ -5,6 +5,7 @@ import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
 
 @Injectable()
 export class TCPLoggingInterceptor implements NestInterceptor {
+  private readonly logger = new Logger(TCPLoggingInterceptor.name);
   intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> | Promise<Observable<unknown>> {
     const now = Date.now();
     const handler = context.getHandler();
@@ -16,16 +17,16 @@ export class TCPLoggingInterceptor implements NestInterceptor {
 
     const processID = param.processId;
 
-    Logger.log(
+    this.logger.log(
       `TCP >> Start process '${processID}' >> method '${handlerName}' at ${now} >> input: ${JSON.stringify(param)}`,
     );
 
     return next.handle().pipe(
       tap(() => {
-        Logger.log(`TCP >> End process '${processID}' >> method '${handlerName}' after ${Date.now() - now}ms`);
+        this.logger.log(`TCP >> End process '${processID}' >> method '${handlerName}' after ${Date.now() - now}ms`);
       }),
       catchError((err) => {
-        Logger.error(
+        this.logger.error(
           `TCP >> Error in process '${processID}': ${err.message} >> data: '${JSON.stringify(param)}', after ${Date.now() - now}ms`,
         );
         throw new RpcException({

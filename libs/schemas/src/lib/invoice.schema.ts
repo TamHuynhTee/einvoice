@@ -2,6 +2,8 @@ import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
 import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
+import { ObjectId } from 'mongodb';
+import { UserModelName } from './user.schema';
 
 export class Client {
   @Prop({ type: String })
@@ -53,8 +55,8 @@ export class Invoice extends BaseSchema {
   @Prop({ type: [Item] })
   items: Item[];
 
-  @Prop({ type: String, required: false })
-  supervisorId: string;
+  @Prop({ type: ObjectId, required: false, ref: UserModelName })
+  supervisorId: ObjectId;
 
   @Prop({ type: String, required: false })
   fileUrl: string;

@@ -62,3 +62,5 @@ export class CreateInvoiceRequestDto {
   @Type(() => ItemRequestDto)
   items: ItemRequestDto[];
 }
+
+export class SendInvoiceRequestDto {}
