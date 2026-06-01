@@ -10,6 +10,7 @@ export const DEFAULT_HTTP_SERVICE_PORT = {
   USER_ACCESS: 3103,
   AUTHORIZER: 3104,
   PDF_GENERATOR: 3105,
+  MEDIA: 3106,
 };
 
 export const DEFAULT_TCP_SERVICE_PORT = {
@@ -18,7 +19,10 @@ export const DEFAULT_TCP_SERVICE_PORT = {
   USER_ACCESS: 3203,
   AUTHORIZER: 3204,
   PDF_GENERATOR: 3205,
+  MEDIA: 3206,
 };
+
+export const CLOUDINARY_MEDIA_FOLDER = 'e-invoice';
 
 export enum MetadataKeys {
   PROCESS_ID = 'processId',

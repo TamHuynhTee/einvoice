@@ -1,21 +1,29 @@
-import { BadRequestException, Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { InvoiceRepository } from '../repositories/invoice.repository';
-import { CreateInvoiceTCPRequest, SendInvoiceTCPRequest } from '@common/interfaces/lib/tcp/invoice';
-import { invoiceRequestMapping } from '../mappers';
-import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
-import { ERROR_CODE } from '@common/constants/lib/enum/error-code.enum';
 import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
+import { ERROR_CODE } from '@common/constants/lib/enum/error-code.enum';
+import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
 import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { firstValueFrom, map } from 'rxjs';
-import { Invoice } from '@common/schemas/lib/invoice.schema';
+import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
+import { CreateInvoiceTCPRequest, SendInvoiceTCPRequest } from '@common/interfaces/lib/tcp/invoice';
+import { UploadFileTCPRequest, UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
+import { GeneratePdfTCPRequest, GeneratePdfTCPResponse } from '@common/interfaces/lib/tcp/pdf-generator';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { ObjectId } from 'mongodb';
+import { firstValueFrom, map } from 'rxjs';
+import { invoiceRequestMapping } from '../mappers';
+import { InvoiceRepository } from '../repositories/invoice.repository';
 
 @Injectable()
 export class InvoiceService {
   constructor(
     private readonly invoiceRepository: InvoiceRepository,
     @Inject(TCP_SERVICES.PDF_GENERATOR_SERVICE) private readonly pdfGeneratorTcpService: TcpClient,
+    @Inject(TCP_SERVICES.MEDIA_SERVICE) private readonly mediaTcpService: TcpClient,
   ) {}
 
   create(params: CreateInvoiceTCPRequest) {
@@ -31,25 +39,52 @@ export class InvoiceService {
       throw new NotFoundException(`Invoice with ID ${invoiceId} not found`);
     }
 
+    if (invoice.status !== INVOICE_STATUS.CREATED) {
+      throw new BadRequestException(ERROR_CODE.INVOICE_CANNOT_BE_SENT);
+    }
+
     const pdfBase64 = await this.generateInvoicePdf(invoice, processId);
 
-    // TODO: Upload to Cloudinary
+    if (!pdfBase64) {
+      throw new InternalServerErrorException('Failed to generate invoice PDF');
+    }
+
+    const fileUrl = await this.uploadFile(
+      {
+        fileBase64: pdfBase64,
+        fileName: `invoice-${invoiceId}`,
+      },
+      processId,
+    );
+
+    if (!fileUrl) {
+      throw new InternalServerErrorException('Failed to upload invoice PDF');
+    }
 
     await this.invoiceRepository.updateById(invoiceId, {
       status: INVOICE_STATUS.SENT,
       supervisorId: new ObjectId(userId),
+      fileUrl,
     });
 
-    return pdfBase64;
+    return fileUrl;
   }
 
-  generateInvoicePdf(data: Invoice, processId: string) {
+  private generateInvoicePdf(data: GeneratePdfTCPRequest, processId: string) {
     return firstValueFrom(
       this.pdfGeneratorTcpService
-        .send<string, Invoice>(TCP_REQUEST_MESSAGE.PDF_GENERATOR.CREATE_INVOICE_PDF, {
+        .send<GeneratePdfTCPResponse, GeneratePdfTCPRequest>(TCP_REQUEST_MESSAGE.PDF_GENERATOR.CREATE_INVOICE_PDF, {
           data,
           processId,
         })
+        .pipe(map((data) => data.data)),
+    );
+  }
+
+  private uploadFile(data: UploadFileTCPRequest, processId: string) {
+    return firstValueFrom(
+      this.mediaTcpService
+        .send<UploadFileTCPResponse, UploadFileTCPRequest>(TCP_REQUEST_MESSAGE.MEDIA.UPLOAD_FILE, { data, processId })
         .pipe(map((data) => data.data)),
     );
   }

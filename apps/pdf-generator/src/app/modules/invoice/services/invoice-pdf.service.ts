@@ -5,9 +5,7 @@ import path from 'path';
 
 @Injectable()
 export class InvoicePdfService {
-  constructor(private readonly pdfService: PdfService) {
-    return;
-  }
+  constructor(private readonly pdfService: PdfService) {}
 
   generateInvoicePdf(invoice: GeneratePdfTCPRequest): Promise<Uint8Array<ArrayBufferLike>> {
     const templatePath = path.join(__dirname, 'templates', 'invoice.template.ejs');
