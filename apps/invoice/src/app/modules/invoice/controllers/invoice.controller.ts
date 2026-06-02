@@ -29,8 +29,12 @@ export class InvoiceController {
     @RequestParams() data: SendInvoiceTCPRequest,
     @ProcessId() processId: string,
   ): Promise<Response<SendInvoiceTCPResponse>> {
-    const pdf = await this.invoiceService.sendById(data, processId);
+    const res = await this.invoiceService.sendById(data, processId);
 
-    return Response.success<SendInvoiceTCPResponse>(pdf || '');
+    if (!res) {
+      return Response.error('Failed to send invoice');
+    }
+
+    return Response.success<SendInvoiceTCPResponse>(res);
   }
 }

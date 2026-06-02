@@ -17,7 +17,7 @@ export class InvoiceRepository {
   }
 
   updateById(id: string, data: Partial<Invoice>) {
-    return this.invoiceModel.findByIdAndUpdate(id, data, { new: true });
+    return this.invoiceModel.findByIdAndUpdate(id, data, { returnDocument: 'after' });
   }
 
   deleteById(id: string) {

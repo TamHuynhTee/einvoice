@@ -15,13 +15,15 @@ import {
 } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { firstValueFrom, map } from 'rxjs';
-import { invoiceRequestMapping } from '../mappers';
+import { createCheckoutSessionMapping, invoiceRequestMapping } from '../mappers';
 import { InvoiceRepository } from '../repositories/invoice.repository';
+import { PaymentService } from '../../payment/services/payment.service';
 
 @Injectable()
 export class InvoiceService {
   constructor(
     private readonly invoiceRepository: InvoiceRepository,
+    private readonly paymentService: PaymentService,
     @Inject(TCP_SERVICES.PDF_GENERATOR_SERVICE) private readonly pdfGeneratorTcpService: TcpClient,
     @Inject(TCP_SERVICES.MEDIA_SERVICE) private readonly mediaTcpService: TcpClient,
   ) {}
@@ -61,13 +63,17 @@ export class InvoiceService {
       throw new InternalServerErrorException('Failed to upload invoice PDF');
     }
 
+    const checkoutData = await this.paymentService.createCheckoutSession(createCheckoutSessionMapping(invoice));
+
+    // TODO: send notification to user
+
     await this.invoiceRepository.updateById(invoiceId, {
       status: INVOICE_STATUS.SENT,
       supervisorId: new ObjectId(userId),
       fileUrl,
     });
 
-    return fileUrl;
+    return checkoutData.url;
   }
 
   private generateInvoicePdf(data: GeneratePdfTCPRequest, processId: string) {
