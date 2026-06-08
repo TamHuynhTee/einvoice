@@ -9,7 +9,7 @@ export const ThrottlerProvider = ThrottlerModule.forRootAsync({
     throttlers: [
       {
         ttl: 60000,
-        limit: 5,
+        limit: 100,
       },
     ],
     errorMessage: 'Too many requests, please try again later.',

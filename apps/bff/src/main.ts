@@ -5,12 +5,14 @@
 
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   try {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule, {
+      rawBody: true,
+    });
     const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
 
     app.enableCors({ origin: '*' });

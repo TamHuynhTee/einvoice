@@ -1,3 +1,4 @@
+import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
 import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
 import { ProcessId } from '@common/decorators/lib/processId.decorator';
 import { RequestParams } from '@common/decorators/lib/request-param.decorator';
@@ -36,5 +37,15 @@ export class InvoiceController {
     }
 
     return Response.success<SendInvoiceTCPResponse>(res);
+  }
+
+  @MessagePattern(TCP_REQUEST_MESSAGE.INVOICE.UPDATE_INVOICE_PAID)
+  async updateInvoicePaid(
+    @RequestParams() invoiceId: string,
+    @ProcessId() processId: string,
+  ): Promise<Response<SendInvoiceTCPResponse>> {
+    await this.invoiceService.updateInvoicePaid(invoiceId, processId);
+
+    return Response.success<string>(HTTP_MESSAGE.UPDATED);
   }
 }

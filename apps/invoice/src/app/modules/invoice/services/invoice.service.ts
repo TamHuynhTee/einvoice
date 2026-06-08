@@ -15,9 +15,9 @@ import {
 } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { firstValueFrom, map } from 'rxjs';
+import { PaymentService } from '../../payment/services/payment.service';
 import { createCheckoutSessionMapping, invoiceRequestMapping } from '../mappers';
 import { InvoiceRepository } from '../repositories/invoice.repository';
-import { PaymentService } from '../../payment/services/payment.service';
 
 @Injectable()
 export class InvoiceService {
@@ -93,5 +93,11 @@ export class InvoiceService {
         .send<UploadFileTCPResponse, UploadFileTCPRequest>(TCP_REQUEST_MESSAGE.MEDIA.UPLOAD_FILE, { data, processId })
         .pipe(map((data) => data.data)),
     );
+  }
+
+  async updateInvoicePaid(invoiceId: string, processId: string) {
+    return this.invoiceRepository.updateById(invoiceId, {
+      status: INVOICE_STATUS.PAID,
+    });
   }
 }
