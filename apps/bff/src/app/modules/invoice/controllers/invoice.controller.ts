@@ -8,7 +8,6 @@ import { UserData } from '@common/decorators/lib/user-data.decorator';
 import {
   CreateInvoiceRequestDto,
   CreateInvoiceResponseDto,
-  SendInvoiceRequestDto,
   SendInvoiceResponseDto,
 } from '@common/interfaces/lib/gateway/invoice';
 import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';

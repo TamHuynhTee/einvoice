@@ -21,7 +21,7 @@ export class KafkaConfiguration {
   }
 }
 
-export function TcpProvider(serviceName: keyof KafkaConfiguration): ClientsProviderAsyncOptions {
+export function KafkaProvider(serviceName: keyof KafkaConfiguration): ClientsProviderAsyncOptions {
   return {
     name: serviceName,
     imports: [ConfigModule],

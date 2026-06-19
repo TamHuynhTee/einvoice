@@ -2,6 +2,7 @@ import { AppConfiguration } from '@common/configuration/lib/app.config';
 import { BaseConfiguration } from '@common/configuration/lib/base.config';
 import { KafkaConfiguration } from '@common/configuration/lib/kafka.config';
 import { MailConfiguration } from '@common/configuration/lib/mail.config';
+import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 
@@ -17,6 +18,10 @@ class Configuration extends BaseConfiguration {
   @ValidateNested()
   @Type(() => MailConfiguration)
   MAIL_CONFIG = new MailConfiguration();
+
+  @ValidateNested()
+  @Type(() => TcpConfiguration)
+  TCP_SERV = new TcpConfiguration();
 }
 
 export const CONFIGURATION = new Configuration();

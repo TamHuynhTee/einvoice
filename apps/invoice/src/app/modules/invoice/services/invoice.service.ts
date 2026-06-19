@@ -1,12 +1,15 @@
 import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
 import { ERROR_CODE } from '@common/constants/lib/enum/error-code.enum';
 import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
+import { KAFKA_TOPIC } from '@common/constants/lib/enum/kafka-topic.enum';
 import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
+import { InvoiceSentPayload } from '@common/interfaces/lib/queue/invoice';
 import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
 import { CreateInvoiceTCPRequest, SendInvoiceTCPRequest } from '@common/interfaces/lib/tcp/invoice';
 import { UploadFileTCPRequest, UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
 import { GeneratePdfTCPRequest, GeneratePdfTCPResponse } from '@common/interfaces/lib/tcp/pdf-generator';
 import { KafkaService } from '@common/kafka/lib/kafka.service';
+import { Invoice } from '@common/schemas/lib/invoice.schema';
 import {
   BadRequestException,
   Inject,
@@ -73,12 +76,13 @@ export class InvoiceService {
       fileUrl,
     });
 
-    this.kafkaClient.emit('invoice.sent', {
-      invoiceId,
-      clientEmail: invoice.client.email,
+    this.kafkaClient.emit<InvoiceSentPayload>(KAFKA_TOPIC.INVOICE.SENT, {
+      data: {
+        id: invoiceId,
+        paymentLink: checkoutData.url,
+      },
+      processId,
     });
-
-    return checkoutData.url;
   }
 
   private generateInvoicePdf(data: GeneratePdfTCPRequest, processId: string) {
@@ -104,5 +108,9 @@ export class InvoiceService {
     return this.invoiceRepository.updateById(invoiceId, {
       status: INVOICE_STATUS.PAID,
     });
+  }
+
+  async getById(id: string) {
+    return this.invoiceRepository.getById(id) as unknown as Invoice;
   }
 }
