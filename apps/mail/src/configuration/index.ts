@@ -11,7 +11,7 @@ class Configuration extends BaseConfiguration {
 
   @ValidateNested()
   @Type(() => KafkaConfiguration)
-  KAFKA_SERV = new KafkaConfiguration();
+  KAFKA_CONFIG = new KafkaConfiguration();
 }
 
 export const CONFIGURATION = new Configuration();

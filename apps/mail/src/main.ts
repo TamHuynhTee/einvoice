@@ -17,7 +17,7 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: [AppModule.CONFIGURATION.KAFKA_SERV.URL],
+        brokers: [AppModule.CONFIGURATION.KAFKA_CONFIG.URL],
       },
       consumer: {
         groupId: QUEUE_GROUPS.MAIL,

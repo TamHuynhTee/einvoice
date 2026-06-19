@@ -27,7 +27,7 @@ export function TcpProvider(serviceName: keyof KafkaConfiguration): ClientsProvi
     imports: [ConfigModule],
     inject: [ConfigService],
     useFactory: (configService: ConfigService) => {
-      return configService.get(`KAFKA_SERV.${serviceName}`) as TcpClientOptions;
+      return configService.get(`KAFKA_CONFIG.${serviceName}`) as TcpClientOptions;
     },
   };
 }

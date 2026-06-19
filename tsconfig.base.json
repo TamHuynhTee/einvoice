@@ -25,7 +25,8 @@
       "@common/middlewares/lib/*": ["libs/middlewares/src/lib/*"],
       "@common/utils/lib/*": ["libs/utils/src/lib/*"],
       "@common/schemas/lib/*": ["libs/schemas/src/lib/*"],
-      "@common/guards/lib/*": ["libs/guards/src/lib/*"]
+      "@common/guards/lib/*": ["libs/guards/src/lib/*"],
+      "@common/kafka/lib/*": ["libs/kafka/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
