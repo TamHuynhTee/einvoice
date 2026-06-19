@@ -18,6 +18,7 @@ import { firstValueFrom, map } from 'rxjs';
 import { PaymentService } from '../../payment/services/payment.service';
 import { createCheckoutSessionMapping, invoiceRequestMapping } from '../mappers';
 import { InvoiceRepository } from '../repositories/invoice.repository';
+import { ClientKafka } from '@nestjs/microservices';
 
 @Injectable()
 export class InvoiceService {
@@ -26,7 +27,12 @@ export class InvoiceService {
     private readonly paymentService: PaymentService,
     @Inject(TCP_SERVICES.PDF_GENERATOR_SERVICE) private readonly pdfGeneratorTcpService: TcpClient,
     @Inject(TCP_SERVICES.MEDIA_SERVICE) private readonly mediaTcpService: TcpClient,
+    @Inject('INVOICE_SERVICE') private readonly kafkaClient: ClientKafka,
   ) {}
+
+  onModuleInit() {
+    this.kafkaClient.connect();
+  }
 
   create(params: CreateInvoiceTCPRequest) {
     const input = invoiceRequestMapping(params);
@@ -65,12 +71,16 @@ export class InvoiceService {
 
     const checkoutData = await this.paymentService.createCheckoutSession(createCheckoutSessionMapping(invoice));
 
-    // TODO: send notification to user
-
     await this.invoiceRepository.updateById(invoiceId, {
       status: INVOICE_STATUS.SENT,
       supervisorId: new ObjectId(userId),
       fileUrl,
+    });
+
+    // TODO: send notification to user
+    this.kafkaClient.emit('invoice.sent', {
+      invoiceId,
+      clientEmail: invoice.client.email,
     });
 
     return checkoutData.url;
