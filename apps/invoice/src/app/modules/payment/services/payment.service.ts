@@ -1,7 +1,6 @@
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
+import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
 import { Injectable, Logger } from '@nestjs/common';
 import { StripeService } from './stripe.service';
-import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common/stripe.interface';
 
 @Injectable()
 export class PaymentService {

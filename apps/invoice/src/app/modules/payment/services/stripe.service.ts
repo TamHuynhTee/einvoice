@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common/stripe.interface';
+import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
 import Stripe, { type Stripe as TypeStripe } from 'stripe';
 
 @Injectable()
