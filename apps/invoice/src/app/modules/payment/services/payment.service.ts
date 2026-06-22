@@ -10,4 +10,8 @@ export class PaymentService {
   async createCheckoutSession(params: CreateCheckoutSessionRequest) {
     return this.stripeService.createCheckoutSession(params);
   }
+
+  async expireCheckoutSession(sessionId: string) {
+    return this.stripeService.expireCheckoutSession(sessionId);
+  }
 }

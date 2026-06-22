@@ -1,1 +1,6 @@
-export type UploadFileTCPResponse = string;
+export type UploadFileTCPResponse = {
+  url: string;
+  publicId: string;
+};
+
+export type DeleteFileTCPResponse = string;

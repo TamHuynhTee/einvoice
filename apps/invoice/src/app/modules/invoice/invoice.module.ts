@@ -10,6 +10,8 @@ import { ClientsModule } from '@nestjs/microservices';
 import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
 import { PaymentModule } from '../payment/payment.module';
 import { QUEUE_SERVICES } from '@common/constants/lib/enum/queue.enum';
+import { SagaOrchestrationModule } from '@common/saga-orchestration/lib/saga-orchestration.module';
+import { InvoiceSendSagaSteps } from './sagas/invoice-send-saga-steps.service';
 
 @Module({
   imports: [
@@ -21,8 +23,9 @@ import { QUEUE_SERVICES } from '@common/constants/lib/enum/queue.enum';
     ]),
     PaymentModule,
     KafkaModule.register(QUEUE_SERVICES.INVOICE),
+    SagaOrchestrationModule.forRoot(),
   ],
   controllers: [InvoiceController],
-  providers: [InvoiceService, InvoiceRepository],
+  providers: [InvoiceService, InvoiceRepository, InvoiceSendSagaSteps],
 })
 export class InvoiceModule {}

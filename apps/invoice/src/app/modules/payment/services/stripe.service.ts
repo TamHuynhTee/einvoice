@@ -1,6 +1,6 @@
+import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
 import Stripe, { type Stripe as TypeStripe } from 'stripe';
 
 @Injectable()
@@ -41,5 +41,9 @@ export class StripeService {
       url: session.url,
       sessionId: session.id,
     };
+  }
+
+  async expireCheckoutSession(sessionId: string) {
+    return this.stripe.checkout.sessions.expire(sessionId);
   }
 }

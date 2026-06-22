@@ -1,10 +1,17 @@
 import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/lib/enum/saga.enum';
-import { SagaInstance, SagaInstanceModel } from '@common/schemas/lib/saga.schema';
+import { SagaInstance, SagaInstanceModel, SagaInstanceModelName } from '@common/schemas/lib/saga.schema';
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class SagaOrchestrationRepository {
-  constructor(private readonly sagaModel: SagaInstanceModel) {}
+  constructor(@InjectModel(SagaInstanceModelName) private readonly sagaModel: SagaInstanceModel) {}
+
+  private assertStepIndex(stepIndex: number) {
+    if (!Number.isInteger(stepIndex) || stepIndex < 0) {
+      throw new Error(`Invalid saga step index: ${stepIndex}`);
+    }
+  }
 
   create(sagaType: SAGA_TYPE, context: Record<string, any>, stepNames: string[]) {
     const steps = stepNames.map((name) => ({
@@ -46,6 +53,8 @@ export class SagaOrchestrationRepository {
   }
 
   async markStepRunning(sagaId: string, stepIndex: number) {
+    this.assertStepIndex(stepIndex);
+
     return this.sagaModel
       .findByIdAndUpdate(
         sagaId,
@@ -59,6 +68,8 @@ export class SagaOrchestrationRepository {
   }
 
   async markStepCompleted(sagaId: string, stepIndex: number, data?: any) {
+    this.assertStepIndex(stepIndex);
+
     return this.sagaModel
       .findByIdAndUpdate(
         sagaId,
@@ -73,6 +84,8 @@ export class SagaOrchestrationRepository {
   }
 
   async markStepFailed(sagaId: string, stepIndex: number, error: string) {
+    this.assertStepIndex(stepIndex);
+
     return this.sagaModel
       .findByIdAndUpdate(
         sagaId,
@@ -87,6 +100,8 @@ export class SagaOrchestrationRepository {
   }
 
   async markStepCompensating(sagaId: string, stepIndex: number) {
+    this.assertStepIndex(stepIndex);
+
     return this.sagaModel
       .findByIdAndUpdate(
         sagaId,
@@ -99,6 +114,8 @@ export class SagaOrchestrationRepository {
   }
 
   async markStepCompensated(sagaId: string, stepIndex: number) {
+    this.assertStepIndex(stepIndex);
+
     return this.sagaModel
       .findByIdAndUpdate(
         sagaId,

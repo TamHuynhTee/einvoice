@@ -109,7 +109,7 @@ export class SagaOrchestrationService {
       if (step && step.compensate) {
         try {
           this.logger.log(`Compensating step: ${step.name} for saga ${sagaId}`);
-          const stepIndex = steps.findIndex((s: any) => s.stepName === stepName);
+          const stepIndex = saga.steps.findIndex((s: any) => s.stepName === stepName);
 
           await this.sagaRepository.markStepCompensating(sagaId, stepIndex);
 

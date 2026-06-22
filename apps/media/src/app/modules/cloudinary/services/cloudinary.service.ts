@@ -1,4 +1,5 @@
 import { CLOUDINARY_MEDIA_FOLDER } from '@common/constants/lib/common.constants';
+import { UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';
@@ -17,7 +18,7 @@ export class CloudinaryService {
     });
   }
 
-  async uploadFile(fileBuffer: Buffer, fileName: string): Promise<string> {
+  async uploadFile(fileBuffer: Buffer, fileName: string): Promise<UploadFileTCPResponse> {
     return new Promise((resolve, reject) => {
       const uploadStream = this.cloudinary.uploader.upload_stream(
         {
@@ -31,11 +32,24 @@ export class CloudinaryService {
             return reject(error);
           }
           this.logger.log('Upload successful:', result);
-          return resolve(result.secure_url);
+          return resolve({ url: result.secure_url, publicId: result.public_id });
         },
       );
 
       streamifier.createReadStream(fileBuffer).pipe(uploadStream);
+    });
+  }
+
+  async deleteFile(publicId: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.cloudinary.uploader.destroy(publicId, (error, result) => {
+        if (error || !result) {
+          this.logger.error('Delete error:', error);
+          return reject(error);
+        }
+        this.logger.log('Delete successful:', result);
+        return resolve();
+      });
     });
   }
 }

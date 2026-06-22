@@ -27,7 +27,7 @@
       "@common/schemas/lib/*": ["libs/schemas/src/lib/*"],
       "@common/guards/lib/*": ["libs/guards/src/lib/*"],
       "@common/kafka/lib/*": ["libs/kafka/src/lib/*"],
-      "@common/saga-orchestration/lib/*": ["libs/saga-orchestration/lib/*"]
+      "@common/saga-orchestration/lib/*": ["libs/saga-orchestration/src/lib/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
