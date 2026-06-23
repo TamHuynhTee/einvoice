@@ -16,13 +16,13 @@ export class ProductRepository {
     return this.productRepository.find();
   }
 
-  async findOne(id: number): Promise<Product | null> {
+  async findById(id: number): Promise<Product | null> {
     return this.productRepository.findOneBy({ id });
   }
 
   async update(id: number, product: Partial<Product>): Promise<Product | null> {
     await this.productRepository.update(id, product);
-    return this.findOne(id);
+    return this.findById(id);
   }
 
   async delete(id: number): Promise<void> {
