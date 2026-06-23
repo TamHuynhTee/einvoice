@@ -6,7 +6,7 @@ import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interfac
 import { UploadFileTCPRequest, UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
 import { GeneratePdfTCPRequest, GeneratePdfTCPResponse } from '@common/interfaces/lib/tcp/pdf-generator';
 import { Invoice } from '@common/schemas/lib/invoice.schema';
-import { BadRequestException, Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ObjectId } from 'mongodb';
 import { firstValueFrom, map } from 'rxjs';
 import { PaymentService } from '../../payment/services/payment.service';
@@ -180,12 +180,6 @@ export class InvoiceSendSagaSteps {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
             this.logger.error(`Failed to compensate invoice update: ${errorMessage}`);
           }
-        },
-      },
-      {
-        name: 'DEMO',
-        execute: async (context: InvoiceSendSagaContext): Promise<SagaStepResult> => {
-          throw new BadRequestException('Demo saga failed');
         },
       },
     ];

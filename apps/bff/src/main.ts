@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/lib/common.constants';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -37,7 +38,7 @@ async function bootstrap() {
     const documentFactory = () => SwaggerModule.createDocument(app, config);
     SwaggerModule.setup(`${globalPrefix}/docs`, app, documentFactory);
 
-    const port = AppModule.CONFIGURATION.APP_CONFIG.PORT;
+    const port = AppModule.CONFIGURATION.APP_CONFIG.PORT || DEFAULT_HTTP_SERVICE_PORT.BFF;
     await app.listen(port);
     Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
     Logger.log(`🚀 Documentation is running on: http://localhost:${port}/${globalPrefix}/docs`);
