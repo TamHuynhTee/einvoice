@@ -31,10 +31,18 @@ export class ExceptionsInterceptor implements NestInterceptor {
         const statusCode =
           err?.code || err?.statusCode || err?.response?.statusCode || HttpStatus.INTERNAL_SERVER_ERROR;
 
+        const response = err.getResponse ? err.getResponse() : err.response;
+        const data = response ? { ...response } : null;
+
+        if (data && typeof data === 'object') {
+          delete data.message;
+          delete data.statusCode;
+        }
+
         const errorResponse = {
           message,
           statusCode,
-          data: null,
+          data,
           processID,
           duration: `${durationMs} ms`,
         };

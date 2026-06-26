@@ -17,6 +17,7 @@ import { InvoiceModule } from './modules/invoice/invoice.module';
 import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
 import { WebhookModule } from './modules/webhook/webhook.module';
+import { HealthModule } from './modules/health/health.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { WebhookModule } from './modules/webhook/webhook.module';
     UserModule,
     AuthorizerModule,
     WebhookModule,
+    HealthModule,
     ClientsModule.registerAsync([
       TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE),
       GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE),
