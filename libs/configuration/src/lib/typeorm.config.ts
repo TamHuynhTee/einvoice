@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DEFAULT_HTTP_HOST } from '@common/constants/lib/common.constants';
+import { DEFAULT_HTTP_HOST } from '@common/constants/common.constants';
 import { DatabaseType } from 'typeorm';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 

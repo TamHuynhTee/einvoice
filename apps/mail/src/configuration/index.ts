@@ -1,8 +1,8 @@
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { KafkaConfiguration } from '@common/configuration/lib/kafka.config';
-import { MailConfiguration } from '@common/configuration/lib/mail.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { KafkaConfiguration } from '@common/configuration/kafka.config';
+import { MailConfiguration } from '@common/configuration/mail.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 

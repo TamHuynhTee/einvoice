@@ -1,7 +1,7 @@
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
-import { TypeORMConfiguration } from '@common/configuration/lib/typeorm.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { TypeORMConfiguration } from '@common/configuration/typeorm.config';
 import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 

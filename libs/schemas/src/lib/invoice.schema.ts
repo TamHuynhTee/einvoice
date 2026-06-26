@@ -1,7 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
-import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
+import { INVOICE_STATUS } from '@common/constants/enum/invoice.enum';
 import { ObjectId } from 'mongodb';
 import { UserModelName } from './user.schema';
 

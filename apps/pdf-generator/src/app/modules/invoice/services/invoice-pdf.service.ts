@@ -1,4 +1,4 @@
-import { GeneratePdfTCPRequest } from '@common/interfaces/lib/tcp/pdf-generator';
+import { GeneratePdfTCPRequest } from '@common/interfaces/tcp/pdf-generator';
 import { Injectable } from '@nestjs/common';
 import { PdfService } from '../../pdf/services/pdf.service';
 import path from 'path';

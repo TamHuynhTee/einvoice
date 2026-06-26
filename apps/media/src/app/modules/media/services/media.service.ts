@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CloudinaryService } from '../../cloudinary/services/cloudinary.service';
-import { DeleteFileTCPRequest, UploadFileTCPRequest, UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
+import { DeleteFileTCPRequest, UploadFileTCPRequest, UploadFileTCPResponse } from '@common/interfaces/tcp/media';
 
 @Injectable()
 export class MediaService {

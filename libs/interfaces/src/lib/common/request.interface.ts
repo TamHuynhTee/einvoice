@@ -1,4 +1,4 @@
-import { MetadataKeys } from '@common/constants/lib/common.constants';
+import { MetadataKeys } from '@common/constants/common.constants';
 import { type Request as ExpressRequest } from 'express';
 import { AuthorizeResponse } from '../tcp/authorizer';
 

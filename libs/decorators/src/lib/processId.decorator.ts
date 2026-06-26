@@ -1,5 +1,5 @@
-import { MetadataKeys } from '@common/constants/lib/common.constants';
-import { getProcessId } from '@common/utils/lib/string.util';
+import { MetadataKeys } from '@common/constants/common.constants';
+import { getProcessId } from '@common/utils/string.util';
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
 export const ProcessId = createParamDecorator((_: unknown, ctx: ExecutionContext) => {

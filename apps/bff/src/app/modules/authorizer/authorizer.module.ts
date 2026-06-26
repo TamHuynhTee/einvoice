@@ -1,4 +1,4 @@
-import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
+import { TCP_SERVICES, TcpProvider } from '@common/configuration/tcp.config';
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { AuthorizerController } from './controllers/authorizer.controller';

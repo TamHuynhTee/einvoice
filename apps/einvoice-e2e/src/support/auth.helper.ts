@@ -1,6 +1,6 @@
-import { CreateUserRequestDto } from '@common/interfaces/lib/gateway/user';
-import { LoginRequestDto, LoginResponseDto } from '@common/interfaces/lib/gateway/authorizer';
-import { ROLE_ID } from '@common/constants/lib/enum/role.enum';
+import { CreateUserRequestDto } from '@common/interfaces/gateway/user';
+import { LoginRequestDto, LoginResponseDto } from '@common/interfaces/gateway/authorizer';
+import { ROLE_ID } from '@common/constants/enum/role.enum';
 import axios from 'axios';
 
 export interface TestUserCredentials {

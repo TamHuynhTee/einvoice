@@ -1,7 +1,7 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
-import { KafkaClient } from '@common/interfaces/lib/queue/common/kafka-client.interface';
+import { KafkaClient } from '@common/interfaces/queue/common/kafka-client.interface';
 import { ClientKafka } from '@nestjs/microservices';
-import { RequestType } from '@common/interfaces/lib/queue/common/request.interface';
+import { RequestType } from '@common/interfaces/queue/common/request.interface';
 import { Observable } from 'rxjs';
 
 @Injectable()

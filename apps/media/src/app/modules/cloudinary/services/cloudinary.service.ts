@@ -1,5 +1,5 @@
-import { CLOUDINARY_MEDIA_FOLDER } from '@common/constants/lib/common.constants';
-import { UploadFileTCPResponse } from '@common/interfaces/lib/tcp/media';
+import { CLOUDINARY_MEDIA_FOLDER } from '@common/constants/common.constants';
+import { UploadFileTCPResponse } from '@common/interfaces/tcp/media';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { v2 as cloudinary } from 'cloudinary';

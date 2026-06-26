@@ -1,6 +1,6 @@
-import { MetadataKeys } from '@common/constants/lib/common.constants';
+import { MetadataKeys } from '@common/constants/common.constants';
 import { createParamDecorator, ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { ExtendedRequest } from '@common/interfaces/lib/common';
+import { ExtendedRequest } from '@common/interfaces/common';
 
 export const UserData = createParamDecorator((_: unknown, ctx: ExecutionContext) => {
   const request: ExtendedRequest = ctx.switchToHttp().getRequest();

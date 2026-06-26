@@ -1,9 +1,9 @@
 import { CallHandler, ExecutionContext, HttpException, HttpStatus, Logger, NestInterceptor } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
-import { type ExtendedRequest } from '@common/interfaces/lib/common';
-import { MetadataKeys } from '@common/constants/lib/common.constants';
-import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { type ExtendedRequest } from '@common/interfaces/common';
+import { MetadataKeys } from '@common/constants/common.constants';
+import { ResponseDTO } from '@common/interfaces/gateway/response.interface';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 
 export class ExceptionsInterceptor implements NestInterceptor {
   private readonly logger = new Logger(ExceptionsInterceptor.name);

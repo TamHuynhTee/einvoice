@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { StripeWebhookService } from './services/stripe-webhook.service';
 import { WebhookController } from './controllers/webhook.controller';
 import { ClientsModule } from '@nestjs/microservices';
-import { TCP_SERVICES, TcpProvider } from '@common/configuration/lib/tcp.config';
+import { TCP_SERVICES, TcpProvider } from '@common/configuration/tcp.config';
 
 @Module({
   imports: [ClientsModule.registerAsync([TcpProvider(TCP_SERVICES.INVOICE_SERVICE)])],

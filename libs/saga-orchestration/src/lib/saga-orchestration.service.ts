@@ -1,6 +1,6 @@
-import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/lib/enum/saga.enum';
-import { SagaContext, SagaStep, SagaStepResult } from '@common/interfaces/lib/saga/saga-step.interface';
-import { SagaInstance } from '@common/schemas/lib/saga.schema';
+import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/enum/saga.enum';
+import { SagaContext, SagaStep, SagaStepResult } from '@common/interfaces/saga/saga-step.interface';
+import { SagaInstance } from '@common/schemas/saga.schema';
 import { Injectable, Logger } from '@nestjs/common';
 import { SagaOrchestrationRepository } from './saga-orchestration.repository';
 

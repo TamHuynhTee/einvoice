@@ -1,7 +1,7 @@
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
-import { ProcessId } from '@common/decorators/lib/processId.decorator';
-import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';
-import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
+import { ProcessId } from '@common/decorators/processId.decorator';
+import { ResponseDTO } from '@common/interfaces/gateway/response.interface';
+import { Response } from '@common/interfaces/tcp/common/response.interface';
 import { BadRequestException, Controller, Headers, Post, RawBodyRequest, Req } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';

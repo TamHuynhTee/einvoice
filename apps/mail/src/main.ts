@@ -3,8 +3,8 @@
  * This is only a minimal backend to get started.
  */
 
-import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/lib/common.constants';
-import { QUEUE_GROUPS } from '@common/constants/lib/enum/queue.enum';
+import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/common.constants';
+import { QUEUE_GROUPS } from '@common/constants/enum/queue.enum';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';

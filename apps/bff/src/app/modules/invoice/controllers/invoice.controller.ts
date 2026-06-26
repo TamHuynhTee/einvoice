@@ -1,24 +1,24 @@
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { PERMISSION } from '@common/constants/lib/enum/role.enum';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { Authorization } from '@common/decorators/lib/authorizer.decorator';
-import { Permissions } from '@common/decorators/lib/permission.decorator';
-import { ProcessId } from '@common/decorators/lib/processId.decorator';
-import { UserData } from '@common/decorators/lib/user-data.decorator';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { PERMISSION } from '@common/constants/enum/role.enum';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { Authorization } from '@common/decorators/authorizer.decorator';
+import { Permissions } from '@common/decorators/permission.decorator';
+import { ProcessId } from '@common/decorators/processId.decorator';
+import { UserData } from '@common/decorators/user-data.decorator';
 import {
   CreateInvoiceRequestDto,
   CreateInvoiceResponseDto,
   SendInvoiceResponseDto,
-} from '@common/interfaces/lib/gateway/invoice';
-import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';
-import { AuthorizedMetadata } from '@common/interfaces/lib/tcp/authorizer';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
+} from '@common/interfaces/gateway/invoice';
+import { ResponseDTO } from '@common/interfaces/gateway/response.interface';
+import { AuthorizedMetadata } from '@common/interfaces/tcp/authorizer';
+import { TcpClient } from '@common/interfaces/tcp/common/tcp-client.interface';
 import {
   CreateInvoiceTCPRequest,
   InvoiceTCPResponse,
   SendInvoiceTCPRequest,
   SendInvoiceTCPResponse,
-} from '@common/interfaces/lib/tcp/invoice';
+} from '@common/interfaces/tcp/invoice';
 import { Body, Controller, Inject, Param, Post, UnauthorizedException } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs';

@@ -1,9 +1,9 @@
-import { GRPC_SERVICES } from '@common/configuration/lib/grpc.config';
-import { MetadataKeys } from '@common/constants/lib/common.constants';
-import { type ExtendedRequest } from '@common/interfaces/lib/common';
-import { type AuthorizerService } from '@common/interfaces/lib/grpc/authorizer';
-import { AuthorizeResponse } from '@common/interfaces/lib/tcp/authorizer';
-import { getAccessToken, setUserData } from '@common/utils/lib/request.util';
+import { GRPC_SERVICES } from '@common/configuration/grpc.config';
+import { MetadataKeys } from '@common/constants/common.constants';
+import { type ExtendedRequest } from '@common/interfaces/common';
+import { type AuthorizerService } from '@common/interfaces/grpc/authorizer';
+import { AuthorizeResponse } from '@common/interfaces/tcp/authorizer';
+import { getAccessToken, setUserData } from '@common/utils/request.util';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { CanActivate, ExecutionContext, Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';

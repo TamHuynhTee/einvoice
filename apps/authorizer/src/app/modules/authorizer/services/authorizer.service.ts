@@ -1,7 +1,7 @@
-import { GRPC_SERVICES } from '@common/configuration/lib/grpc.config';
-import { UserAccessService } from '@common/interfaces/lib/grpc/user-access';
-import { AuthorizeResponse, LoginTCPRequest } from '@common/interfaces/lib/tcp/authorizer';
-import { Role } from '@common/schemas/lib/role.schema';
+import { GRPC_SERVICES } from '@common/configuration/grpc.config';
+import { UserAccessService } from '@common/interfaces/grpc/user-access';
+import { AuthorizeResponse, LoginTCPRequest } from '@common/interfaces/tcp/authorizer';
+import { Role } from '@common/schemas/role.schema';
 import { Inject, Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ClientGrpc } from '@nestjs/microservices';

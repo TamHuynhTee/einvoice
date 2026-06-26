@@ -1,4 +1,4 @@
-import { Product } from '@common/entities/lib/product.entity';
+import { Product } from '@common/entities/product.entity';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

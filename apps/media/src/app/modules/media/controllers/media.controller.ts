@@ -1,17 +1,17 @@
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { RequestParams } from '@common/decorators/lib/request-param.decorator';
-import { TCPLoggingInterceptor } from '@common/interceptors/lib/tcpLogging.interceptor';
-import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { RequestParams } from '@common/decorators/request-param.decorator';
+import { TCPLoggingInterceptor } from '@common/interceptors/tcpLogging.interceptor';
+import { Response } from '@common/interfaces/tcp/common/response.interface';
 import {
   DeleteFileTCPRequest,
   UploadFileTCPRequest,
   DeleteFileTCPResponse,
   UploadFileTCPResponse,
-} from '@common/interfaces/lib/tcp/media';
+} from '@common/interfaces/tcp/media';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { MediaService } from '../services/media.service';
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 
 @Controller()
 @UseInterceptors(TCPLoggingInterceptor)

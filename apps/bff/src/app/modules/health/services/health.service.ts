@@ -1,6 +1,6 @@
-import { GRPC_SERVICES } from '@common/configuration/lib/grpc.config';
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { GRPC_SERVICES } from '@common/configuration/grpc.config';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RedisOptions, TcpClientOptions, Transport } from '@nestjs/microservices';

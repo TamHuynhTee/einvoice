@@ -1,11 +1,11 @@
-import { TCPLoggingInterceptor } from '@common/interceptors/lib/tcpLogging.interceptor';
+import { TCPLoggingInterceptor } from '@common/interceptors/tcpLogging.interceptor';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { ProductService } from '../services/product.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { ProductTCPResponse, CreateProductTCPRequest } from '@common/interfaces/lib/tcp/product';
-import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
-import { RequestParams } from '@common/decorators/lib/request-param.decorator';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { ProductTCPResponse, CreateProductTCPRequest } from '@common/interfaces/tcp/product';
+import { Response } from '@common/interfaces/tcp/common/response.interface';
+import { RequestParams } from '@common/decorators/request-param.decorator';
 @Controller()
 @UseInterceptors(TCPLoggingInterceptor)
 export class ProductController {

@@ -16,18 +16,19 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@common/configuration/lib/*": ["libs/configuration/src/lib/*"],
-      "@common/constants/lib/*": ["libs/constants/src/lib/*"],
-      "@common/entities/lib/*": ["libs/entities/src/lib/*"],
-      "@common/decorators/lib/*": ["libs/decorators/src/lib/*"],
-      "@common/interfaces/lib/*": ["libs/interfaces/src/lib/*"],
-      "@common/interceptors/lib/*": ["libs/interceptors/src/lib/*"],
-      "@common/middlewares/lib/*": ["libs/middlewares/src/lib/*"],
-      "@common/utils/lib/*": ["libs/utils/src/lib/*"],
-      "@common/schemas/lib/*": ["libs/schemas/src/lib/*"],
-      "@common/guards/lib/*": ["libs/guards/src/lib/*"],
-      "@common/kafka/lib/*": ["libs/kafka/src/lib/*"],
-      "@common/saga-orchestration/lib/*": ["libs/saga-orchestration/src/lib/*"]
+      "@common/configuration/*": ["libs/configuration/src/lib/*"],
+      "@common/constants/*": ["libs/constants/src/lib/*"],
+      "@common/entities/*": ["libs/entities/src/lib/*"],
+      "@common/decorators/*": ["libs/decorators/src/lib/*"],
+      "@common/interfaces/*": ["libs/interfaces/src/lib/*"],
+      "@common/interceptors/*": ["libs/interceptors/src/lib/*"],
+      "@common/middlewares/*": ["libs/middlewares/src/lib/*"],
+      "@common/utils/*": ["libs/utils/src/lib/*"],
+      "@common/schemas/*": ["libs/schemas/src/lib/*"],
+      "@common/guards/*": ["libs/guards/src/lib/*"],
+      "@common/kafka/*": ["libs/kafka/src/lib/*"],
+      "@common/saga-orchestration/*": ["libs/saga-orchestration/src/lib/*"],
+      "@common/observability": ["libs/observability/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,8 +1,8 @@
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
-import { KeycloakConfiguration } from '@common/configuration/lib/keycloak.config';
-import { GrpcConfiguration } from '@common/configuration/lib/grpc.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { KeycloakConfiguration } from '@common/configuration/keycloak.config';
+import { GrpcConfiguration } from '@common/configuration/grpc.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 

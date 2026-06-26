@@ -1,7 +1,7 @@
-import { MetadataKeys } from '@common/constants/lib/common.constants';
+import { MetadataKeys } from '@common/constants/common.constants';
 import { parseToken } from './string.util';
-import { type ExtendedRequest } from '@common/interfaces/lib/common';
-import { AuthorizeResponse } from '@common/interfaces/lib/tcp/authorizer';
+import { type ExtendedRequest } from '@common/interfaces/common';
+import { AuthorizeResponse } from '@common/interfaces/tcp/authorizer';
 
 export function getAccessToken(request: ExtendedRequest, keepBearer = false): string | null {
   const token = request.headers.authorization;

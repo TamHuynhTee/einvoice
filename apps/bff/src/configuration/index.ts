@@ -1,9 +1,9 @@
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { GrpcConfiguration } from '@common/configuration/lib/grpc.config';
-import { RedisConfiguration } from '@common/configuration/lib/redis.config';
-import { StripeConfiguration } from '@common/configuration/lib/stripe.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { GrpcConfiguration } from '@common/configuration/grpc.config';
+import { RedisConfiguration } from '@common/configuration/redis.config';
+import { StripeConfiguration } from '@common/configuration/stripe.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 

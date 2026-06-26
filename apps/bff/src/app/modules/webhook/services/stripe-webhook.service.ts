@@ -1,6 +1,6 @@
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { TcpClient } from '@common/interfaces/tcp/common/tcp-client.interface';
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';

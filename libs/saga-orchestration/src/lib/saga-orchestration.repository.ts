@@ -1,5 +1,5 @@
-import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/lib/enum/saga.enum';
-import { SagaInstance, SagaInstanceModel, SagaInstanceModelName } from '@common/schemas/lib/saga.schema';
+import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/enum/saga.enum';
+import { SagaInstance, SagaInstanceModel, SagaInstanceModelName } from '@common/schemas/saga.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 

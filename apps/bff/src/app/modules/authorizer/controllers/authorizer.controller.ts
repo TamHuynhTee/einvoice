@@ -1,10 +1,10 @@
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { ProcessId } from '@common/decorators/lib/processId.decorator';
-import { LoginRequestDto, LoginResponseDto } from '@common/interfaces/lib/gateway/authorizer';
-import { ResponseDTO } from '@common/interfaces/lib/gateway/response.interface';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { LoginTCPRequest, LoginTCPResponse } from '@common/interfaces/lib/tcp/authorizer';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { ProcessId } from '@common/decorators/processId.decorator';
+import { LoginRequestDto, LoginResponseDto } from '@common/interfaces/gateway/authorizer';
+import { ResponseDTO } from '@common/interfaces/gateway/response.interface';
+import { TcpClient } from '@common/interfaces/tcp/common/tcp-client.interface';
+import { LoginTCPRequest, LoginTCPResponse } from '@common/interfaces/tcp/authorizer';
 import { Body, Controller, Inject, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { map } from 'rxjs';

@@ -1,5 +1,5 @@
-import { INVOICE_STATUS } from '@common/constants/lib/enum/invoice.enum';
-import { Invoice, InvoiceModel, InvoiceModelName } from '@common/schemas/lib/invoice.schema';
+import { INVOICE_STATUS } from '@common/constants/enum/invoice.enum';
+import { Invoice, InvoiceModel, InvoiceModelName } from '@common/schemas/invoice.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 

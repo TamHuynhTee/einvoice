@@ -1,9 +1,9 @@
-import { Response } from '@common/interfaces/lib/grpc/common/response.interface';
-import { VerifyUserTokenRequest, VerifyUserTokenResponse } from '@common/interfaces/lib/grpc/authorizer';
+import { Response } from '@common/interfaces/grpc/common/response.interface';
+import { VerifyUserTokenRequest, VerifyUserTokenResponse } from '@common/interfaces/grpc/authorizer';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AuthorizerService } from '../services/authorizer.service';
-import { GRPCLoggingInterceptor } from '@common/interceptors/lib/grpcLogging.interceptor';
+import { GRPCLoggingInterceptor } from '@common/interceptors/grpcLogging.interceptor';
 
 @Controller()
 @UseInterceptors(GRPCLoggingInterceptor)

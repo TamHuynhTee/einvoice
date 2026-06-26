@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/lib/common.constants';
+import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/common.constants';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';

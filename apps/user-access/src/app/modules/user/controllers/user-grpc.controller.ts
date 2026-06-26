@@ -1,7 +1,7 @@
-import { GRPCLoggingInterceptor } from '@common/interceptors/lib/grpcLogging.interceptor';
-import { Response } from '@common/interfaces/lib/grpc/common/response.interface';
-import { GetUserByIdRequest, GetUserByIdResponse } from '@common/interfaces/lib/grpc/user-access';
-import { User } from '@common/schemas/lib/user.schema';
+import { GRPCLoggingInterceptor } from '@common/interceptors/grpcLogging.interceptor';
+import { Response } from '@common/interfaces/grpc/common/response.interface';
+import { GetUserByIdRequest, GetUserByIdResponse } from '@common/interfaces/grpc/user-access';
+import { User } from '@common/schemas/user.schema';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { UserService } from '../services/user.service';

@@ -1,4 +1,4 @@
-import { Invoice } from '@common/schemas/lib/invoice.schema';
+import { Invoice } from '@common/schemas/invoice.schema';
 
 export type InvoiceTCPResponse = Invoice;
 

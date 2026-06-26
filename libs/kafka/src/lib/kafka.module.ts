@@ -1,4 +1,4 @@
-import { QUEUE_SERVICES } from '@common/constants/lib/enum/queue.enum';
+import { QUEUE_SERVICES } from '@common/constants/enum/queue.enum';
 import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';

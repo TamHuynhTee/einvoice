@@ -1,4 +1,4 @@
-import { GRPC_SERVICES, GrpcProvider } from '@common/configuration/lib/grpc.config';
+import { GRPC_SERVICES, GrpcProvider } from '@common/configuration/grpc.config';
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { KeycloakModule } from '../keycloak/keycloak.module';

@@ -5,7 +5,7 @@ import {
   ExchangeClientTokenResponse,
   CreateKeyCloakUserRequest,
   ExchangeUserTokenResponse,
-} from '@common/interfaces/lib/common';
+} from '@common/interfaces/common';
 
 @Injectable()
 export class KeycloakHttpService {

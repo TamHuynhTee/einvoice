@@ -1,4 +1,4 @@
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 import { HttpStatus } from '@nestjs/common';
 
 export class Response<T> {

@@ -1,8 +1,8 @@
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
-import { MongoConfiguration } from '@common/configuration/lib/mongo.config';
-import { StripeConfiguration } from '@common/configuration/lib/stripe.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { MongoConfiguration } from '@common/configuration/mongo.config';
+import { StripeConfiguration } from '@common/configuration/stripe.config';
 import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 

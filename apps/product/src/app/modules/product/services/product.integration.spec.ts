@@ -4,8 +4,8 @@ import { ProductRepository } from '../repositories/product.repository';
 import { ProductService } from './product.service';
 import { PostgreSqlContainer, StartedPostgreSqlContainer } from '@testcontainers/postgresql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from '@common/entities/lib/product.entity';
-import { CreateProductTCPRequest } from '@common/interfaces/lib/tcp/product';
+import { Product } from '@common/entities/product.entity';
+import { CreateProductTCPRequest } from '@common/interfaces/tcp/product';
 import { HttpStatus } from '@nestjs/common';
 
 describe('Product Integration', () => {

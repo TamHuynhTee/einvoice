@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getAccessToken } from '../support/auth.helper';
-import { CreateInvoiceRequestDto, CreateInvoiceResponseDto } from '@common/interfaces/lib/gateway/invoice';
+import { CreateInvoiceRequestDto, CreateInvoiceResponseDto } from '@common/interfaces/gateway/invoice';
 
 describe('Invoice e2e (HTTP)', () => {
   const defaultAxiosHeader: AxiosRequestConfig['headers'] = {};

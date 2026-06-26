@@ -1,6 +1,6 @@
-import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
-import { CreateInvoiceTCPRequest } from '@common/interfaces/lib/tcp/invoice';
-import { Invoice } from '@common/schemas/lib/invoice.schema';
+import { CreateCheckoutSessionRequest } from '@common/interfaces/common';
+import { CreateInvoiceTCPRequest } from '@common/interfaces/tcp/invoice';
+import { Invoice } from '@common/schemas/invoice.schema';
 
 export const invoiceRequestMapping = (data: CreateInvoiceTCPRequest): Partial<Invoice> => {
   return {

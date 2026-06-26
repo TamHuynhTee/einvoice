@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductRepository } from '../repositories/product.repository';
 import { ProductService } from './product.service';
-import { CreateProductTCPRequest } from '@common/interfaces/lib/tcp/product';
+import { CreateProductTCPRequest } from '@common/interfaces/tcp/product';
 import { BadRequestException } from '@nestjs/common';
 
 describe('ProductService', () => {

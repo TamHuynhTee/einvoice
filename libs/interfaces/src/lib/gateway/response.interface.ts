@@ -1,5 +1,5 @@
 import { HttpStatus } from '@nestjs/common';
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ResponseDTO<T> {

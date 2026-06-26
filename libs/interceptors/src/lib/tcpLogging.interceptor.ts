@@ -1,7 +1,7 @@
 import { CallHandler, ExecutionContext, HttpStatus, Injectable, Logger, NestInterceptor } from '@nestjs/common';
 import { catchError, Observable, tap } from 'rxjs';
 import { RpcException } from '@nestjs/microservices';
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
 
 @Injectable()
 export class TCPLoggingInterceptor implements NestInterceptor {

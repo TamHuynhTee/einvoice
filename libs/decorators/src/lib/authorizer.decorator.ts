@@ -1,4 +1,4 @@
-import { MetadataKeys } from '@common/constants/lib/common.constants';
+import { MetadataKeys } from '@common/constants/common.constants';
 import { applyDecorators, SetMetadata } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 

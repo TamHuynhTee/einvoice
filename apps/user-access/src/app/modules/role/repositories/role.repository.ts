@@ -1,4 +1,4 @@
-import { RoleModel, RoleModelName } from '@common/schemas/lib/role.schema';
+import { RoleModel, RoleModelName } from '@common/schemas/role.schema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 

@@ -1,4 +1,4 @@
-import { MongoProvider } from '@common/configuration/lib/mongo.config';
+import { MongoProvider } from '@common/configuration/mongo.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CONFIGURATION } from '../configuration';

@@ -1,7 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
-import { PERMISSION, ROLE } from '@common/constants/lib/enum/role.enum';
+import { PERMISSION, ROLE } from '@common/constants/enum/role.enum';
 
 @Schema({
   collection: 'role',

@@ -1,8 +1,8 @@
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { InvoiceSentPayload } from '@common/interfaces/lib/queue/invoice';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { InvoiceTCPResponse } from '@common/interfaces/lib/tcp/invoice';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { InvoiceSentPayload } from '@common/interfaces/queue/invoice';
+import { TcpClient } from '@common/interfaces/tcp/common/tcp-client.interface';
+import { InvoiceTCPResponse } from '@common/interfaces/tcp/invoice';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom, map } from 'rxjs';

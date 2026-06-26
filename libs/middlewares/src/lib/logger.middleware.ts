@@ -1,8 +1,8 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
-import { MetadataKeys } from '@common/constants/lib/common.constants';
-import { type ExtendedRequest } from '@common/interfaces/lib/common';
-import { getProcessId } from '@common/utils/lib/string.util';
+import { MetadataKeys } from '@common/constants/common.constants';
+import { type ExtendedRequest } from '@common/interfaces/common';
+import { getProcessId } from '@common/utils/string.util';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {

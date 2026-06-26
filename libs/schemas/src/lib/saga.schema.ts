@@ -1,7 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseSchema, createSchema } from './base.schema';
-import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/lib/enum/saga.enum';
+import { SAGA_STATUS, SAGA_STEP_STATUS, SAGA_TYPE } from '@common/constants/enum/saga.enum';
 
 export class SagaStepData {
   @Prop({ type: String, required: true })

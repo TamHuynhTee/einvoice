@@ -1,4 +1,4 @@
-import { CreateCheckoutSessionRequest } from '@common/interfaces/lib/common';
+import { CreateCheckoutSessionRequest } from '@common/interfaces/common';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Stripe, { type Stripe as TypeStripe } from 'stripe';

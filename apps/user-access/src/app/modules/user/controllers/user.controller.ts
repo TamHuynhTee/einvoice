@@ -1,10 +1,10 @@
-import { HTTP_MESSAGE } from '@common/constants/lib/enum/http-message.enum';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { ProcessId } from '@common/decorators/lib/processId.decorator';
-import { RequestParams } from '@common/decorators/lib/request-param.decorator';
-import { TCPLoggingInterceptor } from '@common/interceptors/lib/tcpLogging.interceptor';
-import { Response } from '@common/interfaces/lib/tcp/common/response.interface';
-import { CreateUserTCPRequest, UserTCPResponse } from '@common/interfaces/lib/tcp/user';
+import { HTTP_MESSAGE } from '@common/constants/enum/http-message.enum';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { ProcessId } from '@common/decorators/processId.decorator';
+import { RequestParams } from '@common/decorators/request-param.decorator';
+import { TCPLoggingInterceptor } from '@common/interceptors/tcpLogging.interceptor';
+import { Response } from '@common/interfaces/tcp/common/response.interface';
+import { CreateUserTCPRequest, UserTCPResponse } from '@common/interfaces/tcp/user';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { UserService } from '../services/user.service';

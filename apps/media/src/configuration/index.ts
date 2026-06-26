@@ -1,7 +1,7 @@
-import { AppConfiguration } from '@common/configuration/lib/app.config';
-import { BaseConfiguration } from '@common/configuration/lib/base.config';
-import { TcpConfiguration } from '@common/configuration/lib/tcp.config';
-import { CloudinaryConfiguration } from '@common/configuration/lib/cloudinary.config';
+import { AppConfiguration } from '@common/configuration/app.config';
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { CloudinaryConfiguration } from '@common/configuration/cloudinary.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 

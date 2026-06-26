@@ -1,12 +1,12 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { UserRepository } from '../repositories/user.repository';
-import { CreateUserTCPRequest } from '@common/interfaces/lib/tcp/user';
-import { ERROR_CODE } from '@common/constants/lib/enum/error-code.enum';
+import { CreateUserTCPRequest } from '@common/interfaces/tcp/user';
+import { ERROR_CODE } from '@common/constants/enum/error-code.enum';
 import { createUserRequestMapping } from '../mappers';
-import { TCP_SERVICES } from '@common/configuration/lib/tcp.config';
-import { TcpClient } from '@common/interfaces/lib/tcp/common/tcp-client.interface';
-import { TCP_REQUEST_MESSAGE } from '@common/constants/lib/enum/tcp-request-message.enum';
-import { CreateKeycloakUserTCPRequest } from '@common/interfaces/lib/tcp/authorizer';
+import { TCP_SERVICES } from '@common/configuration/tcp.config';
+import { TcpClient } from '@common/interfaces/tcp/common/tcp-client.interface';
+import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.enum';
+import { CreateKeycloakUserTCPRequest } from '@common/interfaces/tcp/authorizer';
 import { firstValueFrom, map } from 'rxjs';
 
 @Injectable()

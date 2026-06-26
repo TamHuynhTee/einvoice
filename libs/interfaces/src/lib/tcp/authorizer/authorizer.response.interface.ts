@@ -1,6 +1,6 @@
 import { LoginResponseDto } from '../../gateway/authorizer';
-import { PERMISSION } from '@common/constants/lib/enum/role.enum';
-import { User } from '@common/schemas/lib/user.schema';
+import { PERMISSION } from '@common/constants/enum/role.enum';
+import { User } from '@common/schemas/user.schema';
 import { JwtPayload } from 'jsonwebtoken';
 
 export type LoginTCPResponse = LoginResponseDto;

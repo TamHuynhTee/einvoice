@@ -1,3 +1,3 @@
-import { Product } from '@common/entities/lib/product.entity';
+import { Product } from '@common/entities/product.entity';
 
 export type ProductTCPResponse = Product;
