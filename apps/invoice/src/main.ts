@@ -13,9 +13,14 @@ import {
   DEFAULT_TCP_HOST,
   DEFAULT_TCP_SERVICE_PORT,
 } from '@common/constants/common.constants';
+import { Logger as PinoLogger } from '@common/observability/logger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    bufferLogs: true,
+  });
+
+  app.useLogger(app.get(PinoLogger));
 
   const tcpInvoiceServicePort =
     AppModule.CONFIGURATION.TCP_SERV.TCP_INVOICE_SERVICE.options?.port || DEFAULT_TCP_SERVICE_PORT.INVOICE;

@@ -1,5 +1,6 @@
 import { GRPC_SERVICES, GrpcProvider } from '@common/configuration/grpc.config';
 import { RedisProvider } from '@common/configuration/redis.config';
+import { LoggerModule } from '@common/observability/logger';
 import { TCP_SERVICES, TcpProvider } from '@common/configuration/tcp.config';
 import { ThrottlerProvider } from '@common/configuration/throttler.config';
 import { PermissionsGuard } from '@common/guards/permission.guard';
@@ -37,6 +38,7 @@ import { HealthModule } from './modules/health/health.module';
     ]),
     RedisProvider,
     ThrottlerProvider,
+    LoggerModule.forRoot('BFF'),
   ],
   controllers: [],
   providers: [

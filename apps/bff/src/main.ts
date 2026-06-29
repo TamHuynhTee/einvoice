@@ -8,14 +8,17 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app/app.module';
+import { Logger as PinoLogger } from '@common/observability/logger';
 
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule, {
       rawBody: true,
+      bufferLogs: true,
     });
     const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
 
+    app.useLogger(app.get(PinoLogger));
     app.enableCors({ origin: '*' });
     app.setGlobalPrefix(globalPrefix);
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
