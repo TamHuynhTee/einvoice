@@ -4,6 +4,7 @@ import { CONFIGURATION } from '../configuration';
 import { InvoiceModule } from './modules/invoice/invoice.module';
 import { PaymentModule } from './modules/payment/payment.module';
 import { LoggerModule } from '@common/observability/logger';
+import { MetricModule } from '@common/observability/metrics';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { LoggerModule } from '@common/observability/logger';
     LoggerModule.forRoot('INVOICE'),
     InvoiceModule,
     PaymentModule,
+    MetricModule,
   ],
 })
 export class AppModule {
