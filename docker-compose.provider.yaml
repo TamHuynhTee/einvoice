@@ -147,6 +147,7 @@ services:
       - einvoice-nw
     depends_on:
       - loki
+
   prometheus:
     image: prom/prometheus:v3.8.0
     container_name: prometheus
@@ -159,3 +160,17 @@ services:
     networks:
       - einvoice-nw
     restart: unless-stopped
+
+  tempo:
+    image: grafana/tempo:2.10.4
+    container_name: tempo
+    command: ['--config.file=/etc/tempo.yaml']
+    volumes:
+      - ./docker/tempo.yaml:/etc/tempo.yaml
+      - ./docker/docker_data/tempo_data:/etc/tempo
+    ports:
+      - '3200:3200'
+      - '4317:4317'
+      - '4318:4318'
+    networks:
+      - einvoice-nw

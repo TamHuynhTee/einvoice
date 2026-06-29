@@ -1,10 +1,10 @@
-import { InvoiceSentPayload } from '@common/interfaces/queue/invoice';
 import { KAFKA_TOPIC } from '@common/constants/enum/kafka-topic.enum';
-import { Controller, Logger } from '@nestjs/common';
-import { EventPattern, Payload } from '@nestjs/microservices';
-import { MailInvoiceService } from '../services/mail-invoice.service';
-import { RequestParams } from '@common/decorators/request-param.decorator';
 import { ProcessId } from '@common/decorators/processId.decorator';
+import { RequestParams } from '@common/decorators/request-param.decorator';
+import { InvoiceSentPayload } from '@common/interfaces/queue/invoice';
+import { Controller, Logger } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
+import { MailInvoiceService } from '../services/mail-invoice.service';
 
 @Controller()
 export class MailController {

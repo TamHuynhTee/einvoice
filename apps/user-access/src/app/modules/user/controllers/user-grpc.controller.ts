@@ -1,4 +1,5 @@
 import { GRPCLoggingInterceptor } from '@common/interceptors/grpcLogging.interceptor';
+import { TcpServerTracingInterceptor } from '@common/interceptors/tracing-server.interceptor';
 import { Response } from '@common/interfaces/grpc/common/response.interface';
 import { GetUserByIdRequest, GetUserByIdResponse } from '@common/interfaces/grpc/user-access';
 import { User } from '@common/schemas/user.schema';
@@ -7,7 +8,7 @@ import { GrpcMethod } from '@nestjs/microservices';
 import { UserService } from '../services/user.service';
 
 @Controller()
-@UseInterceptors(GRPCLoggingInterceptor)
+@UseInterceptors(GRPCLoggingInterceptor, TcpServerTracingInterceptor)
 export class UserGrpcController {
   constructor(private readonly userService: UserService) {}
 

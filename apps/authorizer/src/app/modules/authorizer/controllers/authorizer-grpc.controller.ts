@@ -4,9 +4,10 @@ import { Controller, UseInterceptors } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
 import { AuthorizerService } from '../services/authorizer.service';
 import { GRPCLoggingInterceptor } from '@common/interceptors/grpcLogging.interceptor';
+import { TcpServerTracingInterceptor } from '@common/interceptors/tracing-server.interceptor';
 
 @Controller()
-@UseInterceptors(GRPCLoggingInterceptor)
+@UseInterceptors(GRPCLoggingInterceptor, TcpServerTracingInterceptor)
 export class AuthorizerGrpcController {
   constructor(private readonly authorizerService: AuthorizerService) {}
 

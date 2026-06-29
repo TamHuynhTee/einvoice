@@ -3,6 +3,7 @@ import { TCP_REQUEST_MESSAGE } from '@common/constants/enum/tcp-request-message.
 import { ProcessId } from '@common/decorators/processId.decorator';
 import { RequestParams } from '@common/decorators/request-param.decorator';
 import { TCPLoggingInterceptor } from '@common/interceptors/tcpLogging.interceptor';
+import { TcpServerTracingInterceptor } from '@common/interceptors/tracing-server.interceptor';
 import { Response } from '@common/interfaces/tcp/common/response.interface';
 import {
   CreateInvoiceTCPRequest,
@@ -15,7 +16,7 @@ import { MessagePattern } from '@nestjs/microservices';
 import { InvoiceService } from '../services/invoice.service';
 
 @Controller()
-@UseInterceptors(TCPLoggingInterceptor)
+@UseInterceptors(TCPLoggingInterceptor, TcpServerTracingInterceptor)
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 

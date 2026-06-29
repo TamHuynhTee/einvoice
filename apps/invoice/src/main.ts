@@ -3,6 +3,10 @@
  * This is only a minimal backend to get started.
  */
 
+import { initTracing } from '@common/observability/tracing/tracing';
+
+initTracing('INVOICE');
+
 import { TcpConfiguration } from '@common/configuration/tcp.config';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';

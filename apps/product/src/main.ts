@@ -3,6 +3,10 @@
  * This is only a minimal backend to get started.
  */
 
+import { initTracing } from '@common/observability/tracing/tracing';
+
+initTracing('PRODUCT');
+
 import { TcpConfiguration } from '@common/configuration/tcp.config';
 import {
   DEFAULT_HTTP_SERVICE_PORT,

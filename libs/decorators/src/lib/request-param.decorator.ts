@@ -3,5 +3,5 @@ import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 export const RequestParams = createParamDecorator((param: string, ctx: ExecutionContext) => {
   const request = ctx.switchToRpc().getData();
 
-  return param ? request.data[param] : request.data;
+  return param ? request.data.data[param] : request.data.data;
 });

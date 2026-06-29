@@ -3,6 +3,10 @@
  * This is only a minimal backend to get started.
  */
 
+import { initTracing } from '@common/observability/tracing/tracing';
+
+initTracing('BFF');
+
 import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/common.constants';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';

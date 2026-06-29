@@ -7,9 +7,10 @@ import { Response } from '@common/interfaces/tcp/common/response.interface';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { AuthorizerService } from '../services/authorizer.service';
+import { TcpServerTracingInterceptor } from '@common/interceptors/tracing-server.interceptor';
 
 @Controller()
-@UseInterceptors(TCPLoggingInterceptor)
+@UseInterceptors(TCPLoggingInterceptor, TcpServerTracingInterceptor)
 export class AuthorizerController {
   constructor(private readonly authorizerService: AuthorizerService) {}
 

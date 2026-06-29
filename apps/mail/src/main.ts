@@ -3,6 +3,10 @@
  * This is only a minimal backend to get started.
  */
 
+import { initTracing } from '@common/observability/tracing/tracing';
+
+initTracing('MAIL');
+
 import { DEFAULT_HTTP_SERVICE_PORT } from '@common/constants/common.constants';
 import { QUEUE_GROUPS } from '@common/constants/enum/queue.enum';
 import { Logger } from '@nestjs/common';

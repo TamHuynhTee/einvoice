@@ -33,10 +33,7 @@ import { HealthModule } from './modules/health/health.module';
     AuthorizerModule,
     WebhookModule,
     HealthModule,
-    ClientsModule.registerAsync([
-      TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE),
-      GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE),
-    ]),
+    ClientsModule.registerAsync([GrpcProvider(GRPC_SERVICES.AUTHORIZER_SERVICE)]),
     RedisProvider,
     ThrottlerProvider,
     LoggerModule.forRoot('BFF'),
@@ -48,6 +45,7 @@ import { HealthModule } from './modules/health/health.module';
     { provide: APP_GUARD, useClass: UserGuard },
     { provide: APP_GUARD, useClass: PermissionsGuard },
     { provide: APP_GUARD, useClass: ThrottlerGuard },
+    TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE),
   ],
 })
 export class AppModule implements NestModule {
