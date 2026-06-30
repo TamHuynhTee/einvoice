@@ -1,6 +1,6 @@
-import { AppConfiguration } from '@common/configuration/app.config';
 import { BaseConfiguration } from '@common/configuration/base.config';
 import { GrpcConfiguration } from '@common/configuration/grpc.config';
+import { HttpPortConfiguration } from '@common/configuration/http.config';
 import { MongoConfiguration } from '@common/configuration/mongo.config';
 import { TcpConfiguration } from '@common/configuration/tcp.config';
 import { Type } from 'class-transformer';
@@ -8,8 +8,8 @@ import { ValidateNested } from 'class-validator';
 
 class Configuration extends BaseConfiguration {
   @ValidateNested()
-  @Type(() => AppConfiguration)
-  APP_CONFIG = new AppConfiguration();
+  @Type(() => HttpPortConfiguration)
+  HTTP_SERV = new HttpPortConfiguration();
 
   @ValidateNested()
   @Type(() => TcpConfiguration)
@@ -17,7 +17,9 @@ class Configuration extends BaseConfiguration {
 
   @ValidateNested()
   @Type(() => MongoConfiguration)
-  MONGO_CONFIG = new MongoConfiguration();
+  MONGO_CONFIG = new MongoConfiguration({
+    DB_NAME: 'einvoice-user-access',
+  });
 
   @ValidateNested()
   @Type(() => GrpcConfiguration)

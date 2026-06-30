@@ -1,5 +1,5 @@
-import { AppConfiguration } from '@common/configuration/app.config';
 import { BaseConfiguration } from '@common/configuration/base.config';
+import { HttpPortConfiguration } from '@common/configuration/http.config';
 import { KafkaConfiguration } from '@common/configuration/kafka.config';
 import { MailConfiguration } from '@common/configuration/mail.config';
 import { TcpConfiguration } from '@common/configuration/tcp.config';
@@ -8,8 +8,8 @@ import { ValidateNested } from 'class-validator';
 
 class Configuration extends BaseConfiguration {
   @ValidateNested()
-  @Type(() => AppConfiguration)
-  APP_CONFIG = new AppConfiguration();
+  @Type(() => HttpPortConfiguration)
+  HTTP_SERV = new HttpPortConfiguration();
 
   @ValidateNested()
   @Type(() => KafkaConfiguration)

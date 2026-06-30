@@ -1,16 +1,16 @@
 import { BaseConfiguration } from '@common/configuration/base.config';
-import { AppConfiguration } from '@common/configuration/app.config';
-import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { HttpPortConfiguration } from '@common/configuration/http.config';
+import { LokiConfiguration } from '@common/configuration/loki.config';
 import { MongoConfiguration } from '@common/configuration/mongo.config';
 import { StripeConfiguration } from '@common/configuration/stripe.config';
-import { LokiConfiguration } from '@common/configuration/loki.config';
-import { ValidateNested } from 'class-validator';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
 import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
 
 class Configuration extends BaseConfiguration {
   @ValidateNested()
-  @Type(() => AppConfiguration)
-  APP_CONFIG = new AppConfiguration();
+  @Type(() => HttpPortConfiguration)
+  HTTP_SERV = new HttpPortConfiguration();
 
   @ValidateNested()
   @Type(() => TcpConfiguration)
@@ -18,7 +18,9 @@ class Configuration extends BaseConfiguration {
 
   @ValidateNested()
   @Type(() => MongoConfiguration)
-  MONGO_CONFIG = new MongoConfiguration();
+  MONGO_CONFIG = new MongoConfiguration({
+    DB_NAME: 'einvoice-invoice',
+  });
 
   @ValidateNested()
   @Type(() => StripeConfiguration)

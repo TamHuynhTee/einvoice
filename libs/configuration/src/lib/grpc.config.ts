@@ -21,15 +21,15 @@ export class GrpcConfiguration {
     this.GRPC_AUTHORIZER_SERVICE = GrpcConfiguration.setValue({
       key: GRPC_SERVICES.AUTHORIZER_SERVICE,
       protoPath: ['./proto/authorizer.proto'],
-      host: process.env['AUTHORIZER_SERVICE_HOST'] || 'localhost',
-      port: Number(process.env['AUTHORIZER_SERVICE_PORT']) || 5100,
+      host: process.env['GRPC_AUTHORIZER_SERVICE_HOST'] || 'localhost',
+      port: Number(process.env['GRPC_AUTHORIZER_SERVICE_PORT']) || 5100,
     });
 
     this.GRPC_USER_ACCESS_SERVICE = GrpcConfiguration.setValue({
       key: GRPC_SERVICES.USER_ACCESS_SERVICE,
       protoPath: ['./proto/user-access.proto'],
-      host: process.env['USER_ACCESS_SERVICE_HOST'] || 'localhost',
-      port: Number(process.env['USER_ACCESS_SERVICE_PORT']) || 5101,
+      host: process.env['GRPC_USER_ACCESS_SERVICE_HOST'] || 'localhost',
+      port: Number(process.env['GRPC_USER_ACCESS_SERVICE_PORT']) || 5101,
     });
   }
 

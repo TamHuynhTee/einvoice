@@ -1,17 +1,17 @@
-import { AppConfiguration } from '@common/configuration/app.config';
 import { BaseConfiguration } from '@common/configuration/base.config';
 import { GrpcConfiguration } from '@common/configuration/grpc.config';
+import { HttpPortConfiguration } from '@common/configuration/http.config';
+import { LokiConfiguration } from '@common/configuration/loki.config';
 import { RedisConfiguration } from '@common/configuration/redis.config';
 import { StripeConfiguration } from '@common/configuration/stripe.config';
 import { TcpConfiguration } from '@common/configuration/tcp.config';
-import { LokiConfiguration } from '@common/configuration/loki.config';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
 
 class Configuration extends BaseConfiguration {
   @ValidateNested()
-  @Type(() => AppConfiguration)
-  APP_CONFIG = new AppConfiguration();
+  @Type(() => HttpPortConfiguration)
+  HTTP_SERV = new HttpPortConfiguration();
 
   @ValidateNested()
   @Type(() => TcpConfiguration)

@@ -7,7 +7,8 @@
     "nx:reset": "nx reset",
     "nx:run-many": "nx run-many",
     "dev": "pnpm nx:reset && pnpm nx:run-many -t serve",
-    "dev:lite": "pnpm dev --projects=bff"
+    "dev:lite": "pnpm dev --projects=bff",
+    "docker:start:local": "chmod +x ./tools/deploy/run-local.sh && ./tools/deploy/run-local.sh"
   },
   "private": true,
   "engines": {

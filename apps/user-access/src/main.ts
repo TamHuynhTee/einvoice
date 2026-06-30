@@ -41,7 +41,7 @@ async function bootstrap() {
 
   const globalPrefix = AppModule.CONFIGURATION.GLOBAL_PREFIX;
   app.setGlobalPrefix(globalPrefix);
-  const port = AppModule.CONFIGURATION.APP_CONFIG.PORT || DEFAULT_HTTP_SERVICE_PORT.USER_ACCESS;
+  const port = AppModule.CONFIGURATION.HTTP_SERV.HTTP_USER_ACCESS_PORT || DEFAULT_HTTP_SERVICE_PORT.USER_ACCESS;
 
   await app.listen(port);
   await app.startAllMicroservices();
