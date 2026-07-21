@@ -1,0 +1,15 @@
+import { Module } from '@nestjs/common';
+import { MailController } from './controllers/mail.controller';
+import { MailService } from './services/mail.service';
+
+import { TCP_SERVICES, TcpProvider } from '@common/configuration/tcp.config';
+import { MailTemplateModule } from '../mail-template/mail-template.module';
+import { MailInvoiceService } from './services/mail-invoice.service';
+
+@Module({
+  imports: [MailTemplateModule],
+  controllers: [MailController],
+  providers: [MailService, MailInvoiceService, TcpProvider(TCP_SERVICES.INVOICE_SERVICE)],
+  exports: [MailService],
+})
+export class MailModule {}

@@ -1,0 +1,10 @@
+import { TCP_SERVICES, TcpProvider } from '@common/configuration/tcp.config';
+import { Module } from '@nestjs/common';
+import { AuthorizerController } from './controllers/authorizer.controller';
+
+@Module({
+  imports: [],
+  controllers: [AuthorizerController],
+  providers: [TcpProvider(TCP_SERVICES.AUTHORIZER_SERVICE)],
+})
+export class AuthorizerModule {}

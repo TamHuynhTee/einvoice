@@ -8,7 +8,7 @@ export default {
       // Regex parse commit message
       // Format: <type>/#<scope>: <subject>
       // Ví dụ: feat/#auth: thêm chức năng đăng nhập với JWT
-      headerPattern: /^(\w*)\/#(\w*): (.*)$/,
+      headerPattern: /^(\w+)\/#([\w-]+): (.*)$/,
 
       // Ánh xạ các group trong regex vào field của commitlint
       headerCorrespondence: ['type', 'scope', 'subject'],
@@ -39,6 +39,7 @@ export default {
     // Subject (phần mô tả ngắn) không bị ép theo style nào
     // Đang disable (0 = off), nên có thể viết hoa/viết thường tự do
     // Ví dụ: "thêm chức năng login" hoặc "Thêm chức năng login" đều pass
+    'subject-empty': [0, 'never'],
     'subject-case': [
       0, // off
       'never',

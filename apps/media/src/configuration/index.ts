@@ -1,0 +1,24 @@
+import { BaseConfiguration } from '@common/configuration/base.config';
+import { CloudinaryConfiguration } from '@common/configuration/cloudinary.config';
+import { HttpPortConfiguration } from '@common/configuration/http.config';
+import { TcpConfiguration } from '@common/configuration/tcp.config';
+import { Type } from 'class-transformer';
+import { ValidateNested } from 'class-validator';
+
+class Configuration extends BaseConfiguration {
+  @ValidateNested()
+  @Type(() => HttpPortConfiguration)
+  HTTP_SERV = new HttpPortConfiguration();
+
+  @ValidateNested()
+  @Type(() => TcpConfiguration)
+  TCP_SERV = new TcpConfiguration();
+
+  @ValidateNested()
+  @Type(() => CloudinaryConfiguration)
+  CLOUDINARY_CONFIG = new CloudinaryConfiguration();
+}
+
+export const CONFIGURATION = new Configuration();
+
+CONFIGURATION.validate();
